@@ -28,10 +28,10 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.TextSecretKey = new System.Windows.Forms.TextBox();
             this.LabelAPIKey = new System.Windows.Forms.Label();
             this.LabelSecretKey = new System.Windows.Forms.Label();
             this.TextAPIKey = new System.Windows.Forms.TextBox();
-            this.TextSecretKey = new System.Windows.Forms.TextBox();
             this.PanelButtons = new System.Windows.Forms.Panel();
             this.ButtonAuthorize = new System.Windows.Forms.Button();
             this.ButtonCancel = new System.Windows.Forms.Button();
@@ -56,6 +56,14 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(331, 51);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // TextSecretKey
+            // 
+            this.TextSecretKey.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TextSecretKey.Location = new System.Drawing.Point(98, 28);
+            this.TextSecretKey.Name = "TextSecretKey";
+            this.TextSecretKey.Size = new System.Drawing.Size(230, 19);
+            this.TextSecretKey.TabIndex = 3;
             // 
             // LabelAPIKey
             // 
@@ -86,14 +94,6 @@
             this.TextAPIKey.Name = "TextAPIKey";
             this.TextAPIKey.Size = new System.Drawing.Size(230, 19);
             this.TextAPIKey.TabIndex = 2;
-            // 
-            // TextSecretKey
-            // 
-            this.TextSecretKey.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TextSecretKey.Location = new System.Drawing.Point(98, 28);
-            this.TextSecretKey.Name = "TextSecretKey";
-            this.TextSecretKey.Size = new System.Drawing.Size(230, 19);
-            this.TextSecretKey.TabIndex = 3;
             // 
             // PanelButtons
             // 
