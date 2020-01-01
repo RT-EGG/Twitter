@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace TwitterTimeLine
+namespace Imetter
 {
     static class ImageDownloader
     {

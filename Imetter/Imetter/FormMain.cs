@@ -12,7 +12,7 @@ using CoreTweet;
 using System.Net;
 using System.IO;
 
-namespace TwitterTimeLine
+namespace Imetter
 {
     public partial class FormMain : Form
     {

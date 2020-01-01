@@ -53,6 +53,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorizeKeys.cs" />
+    <Compile Include="CtrlMediaContentListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CtrlMediaContentListView.Designer.cs">
+      <DependentUpon>CtrlMediaContentListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CtrlMediaContentView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CtrlMediaContentView.Designer.cs">
+      <DependentUpon>CtrlMediaContentView.cs</DependentUpon>
+    </Compile>
     <Compile Include="CtrlTweetView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -86,8 +98,12 @@
     <Compile Include="ImageDownloader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TweetMedia.cs" />
     <Compile Include="TweetMediaLog.cs" />
     <Compile Include="UserProfileImages.cs" />
+    <EmbeddedResource Include="CtrlMediaContentView.resx">
+      <DependentUpon>CtrlMediaContentView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CtrlTweetView.resx">
       <DependentUpon>CtrlTweetView.cs</DependentUpon>
     </EmbeddedResource>

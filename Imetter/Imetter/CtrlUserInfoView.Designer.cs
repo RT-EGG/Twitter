@@ -1,4 +1,4 @@
-﻿namespace TwitterTimeLine
+﻿namespace Imetter
 {
     partial class CtrlUserInfoView
     {

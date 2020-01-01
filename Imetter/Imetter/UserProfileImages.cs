@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using CoreTweet;
 
-namespace TwitterTimeLine
+namespace Imetter
 {
     public interface IUserProfileImages
     {

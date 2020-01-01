@@ -11,26 +11,19 @@ using CoreTweet;
 
 namespace Imetter
 {
-    public partial class CtrlTweetView : UserControl
+    public partial class CtrlMediaContentListView : UserControl
     {
-        public CtrlTweetView()
+        public CtrlMediaContentListView()
         {
             InitializeComponent();
         }
 
-        public Status Status
+        public IEnumerable<MediaEntity> Medias
         {
-            get { return m_Status; }
+            get { return null; }
             set {
-                m_Status = value;
-                if (m_Status != null) {
-                    UserInfo.User = Status.User;
-                    LabelTweetText.Text = Status.Text;
-                }
                 return;
             }
         }
-
-        private Status m_Status = null;
     }
 }

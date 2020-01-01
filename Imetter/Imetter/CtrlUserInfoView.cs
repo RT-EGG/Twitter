@@ -1,7 +1,7 @@
 ﻿using CoreTweet;
 using System.Windows.Forms;
 
-namespace TwitterTimeLine
+namespace Imetter
 {
     public partial class CtrlUserInfoView : UserControl
     {
