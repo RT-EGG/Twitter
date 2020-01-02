@@ -26,6 +26,8 @@ namespace Imetter
                 if (m_Status != null) {
                     UserInfo.User = Status.User;
                     LabelTweetText.Text = Status.Text;
+                    ContentsView.Medias = Status.Entities.Media;
+                    ContentsView.Visible = Status.Entities.Media.Length != 0;
                 }
                 return;
             }

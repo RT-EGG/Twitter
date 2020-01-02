@@ -101,6 +101,9 @@
     <Compile Include="TweetMedia.cs" />
     <Compile Include="TweetMediaLog.cs" />
     <Compile Include="UserProfileImages.cs" />
+    <EmbeddedResource Include="CtrlMediaContentListView.resx">
+      <DependentUpon>CtrlMediaContentListView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CtrlMediaContentView.resx">
       <DependentUpon>CtrlMediaContentView.cs</DependentUpon>
     </EmbeddedResource>
