@@ -33,8 +33,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CtrlMediaContentView";
             this.Size = new System.Drawing.Size(314, 281);
             this.ResumeLayout(false);

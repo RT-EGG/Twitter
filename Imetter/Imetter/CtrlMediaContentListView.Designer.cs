@@ -32,25 +32,28 @@
             // 
             // LayoutPanel
             // 
+            this.LayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.LayoutPanel.ColumnCount = 2;
             this.LayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.LayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.LayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.LayoutPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LayoutPanel.Name = "LayoutPanel";
             this.LayoutPanel.RowCount = 2;
             this.LayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.LayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.LayoutPanel.Size = new System.Drawing.Size(959, 598);
+            this.LayoutPanel.Size = new System.Drawing.Size(575, 399);
             this.LayoutPanel.TabIndex = 0;
             // 
             // CtrlMediaContentListView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.LayoutPanel);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "CtrlMediaContentListView";
-            this.Size = new System.Drawing.Size(959, 598);
+            this.Size = new System.Drawing.Size(575, 399);
             this.ResumeLayout(false);
 
         }

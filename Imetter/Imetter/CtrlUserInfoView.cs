@@ -23,8 +23,8 @@ namespace Imetter
                     LabelUserScreenName.Text = "---";
 
                 } else {
-                    LabelUserName.Text = $"@{ User.Name} ";
-                    LabelUserScreenName.Text = User.ScreenName;
+                    LabelUserName.Text = User.Name;
+                    LabelUserScreenName.Text = $"@{ User.ScreenName }";
                     UserProfileImages.QueryAsync(User, (IUserProfileImages inImages) => {
                         PanelIcon.BackgroundImage = inImages.Icon;
                     });

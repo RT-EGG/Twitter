@@ -1,6 +1,7 @@
 ﻿using CoreTweet;
 using System;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Imetter
 {
@@ -30,6 +31,14 @@ namespace Imetter
                 }
                 return;
             }
+        }
+
+        public bool ContainsInThumbnail(Point inPoint)
+        {
+            if (m_Media == null)
+                return false;
+
+            return false;
         }
 
         private MediaEntity m_MediaEntity = null;

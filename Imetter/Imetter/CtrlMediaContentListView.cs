@@ -73,6 +73,7 @@ namespace Imetter
         private void SetLayout(Control inControl, int inRow, int inCol, int inRowSpan, int inColSpan)
         {
             inControl.Parent = LayoutPanel;
+            inControl.Dock = DockStyle.Fill;
             LayoutPanel.SetCellPosition(inControl, new TableLayoutPanelCellPosition(inCol, inRow));
             LayoutPanel.SetRowSpan(inControl, inRowSpan);
             LayoutPanel.SetColumnSpan(inControl, inColSpan);

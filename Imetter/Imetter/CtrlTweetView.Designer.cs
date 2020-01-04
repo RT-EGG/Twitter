@@ -37,7 +37,7 @@
             // 
             this.LabelTweetText.AutoSize = true;
             this.LabelTweetText.Dock = System.Windows.Forms.DockStyle.Top;
-            this.LabelTweetText.Location = new System.Drawing.Point(0, 95);
+            this.LabelTweetText.Location = new System.Drawing.Point(0, 62);
             this.LabelTweetText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LabelTweetText.Name = "LabelTweetText";
             this.LabelTweetText.Padding = new System.Windows.Forms.Padding(3);
@@ -65,21 +65,22 @@
             // ContentsView
             // 
             this.ContentsView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ContentsView.Location = new System.Drawing.Point(0, 113);
+            this.ContentsView.Location = new System.Drawing.Point(0, 80);
             this.ContentsView.Margin = new System.Windows.Forms.Padding(1);
             this.ContentsView.Medias = null;
             this.ContentsView.Name = "ContentsView";
-            this.ContentsView.Size = new System.Drawing.Size(529, 357);
+            this.ContentsView.Size = new System.Drawing.Size(529, 333);
             this.ContentsView.TabIndex = 2;
             this.ContentsView.Click += new System.EventHandler(this.ContentsView_Click);
             this.ContentsView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ContentsView_MouseClick);
+            this.ContentsView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ContentsView_MouseDown);
             // 
             // UserInfo
             // 
             this.UserInfo.Dock = System.Windows.Forms.DockStyle.Top;
             this.UserInfo.Location = new System.Drawing.Point(0, 0);
             this.UserInfo.Name = "UserInfo";
-            this.UserInfo.Size = new System.Drawing.Size(529, 95);
+            this.UserInfo.Size = new System.Drawing.Size(529, 62);
             this.UserInfo.TabIndex = 0;
             this.UserInfo.User = null;
             // 
@@ -87,8 +88,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.PanelAction);
             this.Controls.Add(this.ContentsView);
+            this.Controls.Add(this.PanelAction);
             this.Controls.Add(this.LabelTweetText);
             this.Controls.Add(this.UserInfo);
             this.Name = "CtrlTweetView";
@@ -99,9 +100,9 @@
         }
 
         #endregion
-        private CtrlUserInfoView UserInfo;
         private System.Windows.Forms.Label LabelTweetText;
         private CtrlMediaContentListView ContentsView;
         private System.Windows.Forms.TableLayoutPanel PanelAction;
+        private CtrlUserInfoView UserInfo;
     }
 }

@@ -55,7 +55,7 @@
             this.TweetView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TweetView.Location = new System.Drawing.Point(3, 28);
             this.TweetView.Name = "TweetView";
-            this.TweetView.Size = new System.Drawing.Size(698, 369);
+            this.TweetView.Size = new System.Drawing.Size(598, 437);
             this.TweetView.Status = null;
             this.TweetView.TabIndex = 3;
             // 
@@ -63,7 +63,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(704, 400);
+            this.ClientSize = new System.Drawing.Size(604, 468);
             this.Controls.Add(this.TweetView);
             this.Controls.Add(this.ButtonUpdateTimeline);
             this.Name = "FormMain";
