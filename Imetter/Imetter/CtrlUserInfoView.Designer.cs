@@ -93,7 +93,6 @@
             this.Controls.Add(this.Panel);
             this.Name = "CtrlUserInfoView";
             this.Size = new System.Drawing.Size(414, 107);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CtrlUserInfoView_Paint);
             this.Panel.ResumeLayout(false);
             this.Panel.PerformLayout();
             this.ResumeLayout(false);

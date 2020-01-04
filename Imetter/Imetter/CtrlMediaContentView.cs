@@ -17,24 +17,19 @@ namespace Imetter
             set {
                 m_MediaEntity = value;
                 if (MediaEntity != null) {
-                    ImageUpdateTimer.Enabled = true;
+                    TweetMedia.Query(MediaEntity, (ITweetMedia inMedia) => {
+                        m_Media = inMedia;
+                        switch (m_Media.MediaType) {
+                            case TweetMediaType.Image:
+                                this.BackgroundImage = (m_Media as ITweetImageMedia).Image;
+                                break;
+                            default:
+                                break;
+                        }
+                    });
                 }
                 return;
             }
-        }
-
-        private async void ImageUpdateTimer_Tick(object sender, EventArgs e)
-        {
-            ImageUpdateTimer.Enabled = false;
-            m_Media = await TweetMedia.QueryAsync(m_MediaEntity);
-            switch (m_Media.MediaType) {
-                case TweetMediaType.Image:
-                    this.BackgroundImage = (m_Media as ITweetImageMedia).Image;
-                    break;
-                default:
-                    break;
-            }
-            return;
         }
 
         private MediaEntity m_MediaEntity = null;

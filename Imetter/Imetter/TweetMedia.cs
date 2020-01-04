@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace Imetter
 {
+    delegate void MediaReadyEvent(ITweetMedia inMedia);
+
     enum TweetMediaType
     {
         Unknown,
@@ -24,44 +26,28 @@ namespace Imetter
     interface ITweetImageMedia
     {
         Image Image { get; }
+        Image Thumbnail { get; }
     }
 
     abstract class TweetMedia : ITweetMedia
     {
-        public static ITweetMedia Query(MediaEntity inEntity)
+        public static void Query(MediaEntity inEntity, MediaReadyEvent inOnMediaReady)
         {
-            ITweetMedia result;
-            if (!m_Medias.TryGetValue(inEntity.Id, out result)) {
-                result = NewMedia(inEntity);
-                m_Medias.Add(inEntity.Id, result);
+            if (m_Medias.TryGetValue(inEntity.Id, out ITweetMedia result)) {
+                inOnMediaReady?.Invoke(result);
+            } else {
+                NewMedia(inEntity, (ITweetMedia inMedia) => {
+                    m_Medias.Add(inEntity.Id, inMedia);
+                    inOnMediaReady?.Invoke(inMedia);
+                });
             }
-
-            return result;
+            return;
         }
 
-        public static async Task<ITweetMedia> QueryAsync(MediaEntity inEntity)
-        {
-            ITweetMedia result;
-            if (!m_Medias.TryGetValue(inEntity.Id, out result)) {
-                result = await NewMediaAsync(inEntity);
-                m_Medias.Add(inEntity.Id, result);
-            }
-
-            return result;
-        }
-
-        private static ITweetMedia NewMedia(MediaEntity inEntity)
+        private static ITweetMedia NewMedia(MediaEntity inEntity, MediaReadyEvent inOnMediaReady)
         {
             TweetMedia result = CreateInstance(inEntity);
-            result.LoadResource();
-            result.LastUpdateTime = DateTime.Now;
-            return result;
-        }
-
-        private static async Task<ITweetMedia> NewMediaAsync(MediaEntity inEntity)
-        {
-            TweetMedia result = CreateInstance(inEntity);
-            await result.LoadResourceAsync();
+            result.LoadResource(inOnMediaReady);
             result.LastUpdateTime = DateTime.Now;
             return result;
         }
@@ -91,29 +77,23 @@ namespace Imetter
 
         public TweetMedia(MediaEntity inEntity)
         {
-            ID = inEntity.Id;
-            URL = inEntity.MediaUrlHttps;
+            RawData = inEntity;
             return;
         }
 
-        protected virtual void LoadResource()
+        protected virtual void LoadResource(MediaReadyEvent inEvent)
         {
-            return;
-        }
-
-        protected virtual async Task LoadResourceAsync()
-        {
-            await Task.Run(() => {
-            });
             return;
         }
 
         public abstract TweetMediaType MediaType
         { get; }
+        protected MediaEntity RawData
+        { get; private set; } = null;
         public long ID
-        { get; private set; } = 0;
+        { get => RawData.Id; }
         public string URL
-        { get; private set; } = "";
+        { get => RawData.MediaUrlHttps; }
         public DateTime LastUpdateTime
         { get; private set; } = DateTime.Now;
  
@@ -128,18 +108,36 @@ namespace Imetter
             }
 
             public override TweetMediaType MediaType => TweetMediaType.Image;
-            public Image Image
+            Image ITweetImageMedia.Image => Image;
+            Image ITweetImageMedia.Thumbnail => Thumbnail;
+            public Bitmap Image
+            { get; private set; } = null;
+            public Bitmap Thumbnail
             { get; private set; } = null;
 
-            protected override void LoadResource()
+            protected override void LoadResource(MediaReadyEvent inEvent)
             {
-                Image = ImageDownloader.Download(URL);
-                return;
-            }
+                ImageDownloader.DownloadAsync(URL, (Bitmap inImage) => {
+                    Image = inImage;
+                    if ((RawData.Sizes != null) && (RawData.Sizes.Thumb != null)) {
+                        switch (RawData.Sizes.Thumb.Resize) {
+                            case "crop":
+                                Rectangle rect = new Rectangle();
+                                rect.X = (Image.Width / 2) - (RawData.Sizes.Thumb.Width / 2);
+                                rect.Y = (Image.Height / 2) - (RawData.Sizes.Thumb.Height / 2);
+                                rect.Width = RawData.Sizes.Thumb.Width;
+                                rect.Height = RawData.Sizes.Thumb.Height;
+                                Thumbnail = Image.Clone(rect, Image.PixelFormat);
+                                break;
+                            case "fit":
+                                break;
+                            default:
+                                break;
+                        }
+                    }
 
-            protected async override Task LoadResourceAsync()
-            {
-                Image = await ImageDownloader.DownloadAsync(URL);
+                    inEvent?.Invoke(this);
+                });
                 return;
             }
         }

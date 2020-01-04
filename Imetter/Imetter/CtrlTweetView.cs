@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using CoreTweet;
+using System.Windows.Forms;
 
 namespace Imetter
 {
@@ -26,13 +19,25 @@ namespace Imetter
                 if (m_Status != null) {
                     UserInfo.User = Status.User;
                     LabelTweetText.Text = Status.Text;
-                    ContentsView.Medias = Status.Entities.Media;
-                    ContentsView.Visible = Status.Entities.Media.Length != 0;
+                    ContentsView.Medias = Status.ExtendedEntities.Media;
+                    ContentsView.Visible = (Status.ExtendedEntities.Media != null) && (Status.ExtendedEntities.Media.Length != 0);
+                    if (!ContentsView.Visible)
+                        Height = LabelTweetText.Bottom + PanelAction.Height;
                 }
                 return;
             }
         }
 
         private Status m_Status = null;
+
+        private void ContentsView_MouseClick(object sender, MouseEventArgs e)
+        {
+            Control clicked = ContentsView.GetChildAtPoint(e.Location);
+        }
+
+        private void ContentsView_Click(object sender, EventArgs e)
+        {
+            return;
+        }
     }
 }

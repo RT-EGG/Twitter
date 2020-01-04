@@ -27,30 +27,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.ImageUpdateTimer = new System.Windows.Forms.Timer(this.components);
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
-            // 
-            // ImageUpdateTimer
-            // 
-            this.ImageUpdateTimer.Interval = 1;
-            this.ImageUpdateTimer.Tick += new System.EventHandler(this.ImageUpdateTimer_Tick);
             // 
             // CtrlMediaContentView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "CtrlMediaContentView";
-            this.Size = new System.Drawing.Size(524, 421);
+            this.Size = new System.Drawing.Size(314, 281);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Timer ImageUpdateTimer;
-        private System.Windows.Forms.Timer timer1;
     }
 }

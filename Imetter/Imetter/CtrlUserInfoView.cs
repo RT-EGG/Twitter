@@ -1,5 +1,5 @@
-﻿using CoreTweet;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using CoreTweet;
 
 namespace Imetter
 {
@@ -23,27 +23,16 @@ namespace Imetter
                     LabelUserScreenName.Text = "---";
 
                 } else {
-                    UserChanged = true;
                     LabelUserName.Text = $"@{ User.Name} ";
                     LabelUserScreenName.Text = User.ScreenName;
-                    this.Invalidate();
+                    UserProfileImages.QueryAsync(User, (IUserProfileImages inImages) => {
+                        PanelIcon.BackgroundImage = inImages.Icon;
+                    });
                 }
                 return;
             }
         }
 
-        private async void CtrlUserInfoView_Paint(object sender, PaintEventArgs e)
-        {
-            if (UserChanged) {
-                IUserProfileImages newImages = await UserProfileImages.QueryAsync(User);
-                PanelIcon.BackgroundImage = newImages.Icon;
-
-                UserChanged = false;
-            }
-            return;
-        }
-
         private User m_User = null;
-        private bool UserChanged = false;
     }
 }

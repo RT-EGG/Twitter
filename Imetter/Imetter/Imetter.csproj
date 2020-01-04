@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorizeKeys.cs" />
+    <Compile Include="CollectionExtension.cs" />
     <Compile Include="CtrlMediaContentListView.cs">
       <SubType>UserControl</SubType>
     </Compile>

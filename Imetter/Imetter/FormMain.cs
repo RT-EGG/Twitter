@@ -85,14 +85,14 @@ namespace Imetter
                                          m_AccessKeys.AccessSecret);
                 try {
                     UserResponse user = m_Tokens.Account.VerifyCredentials();
-                    UserInfoView.User = user;
+                    //UserInfoView.User = user;
 
                     //WebClient client = new WebClient();
                     //MemoryStream stream = new MemoryStream(client.DownloadData(user.ProfileImageUrlHttps));
                     //Bitmap icon = new Bitmap(stream);
                     //this.BackgroundImage = icon;
 
-                } catch (WebException e) {
+                } catch /*(WebException e)*/ {
                     // can not authorize user by saved access tokens.
                 }
 
@@ -127,35 +127,12 @@ namespace Imetter
 
         private void UpdateTimeline()
         {
-            //var responses = m_Tokens.Search.Tweets("", since_id: m_LastResponseID, include_entities: true);
-            //foreach (var response in responses.Reverse()) {
-            //    if ((response.Entities.Media == null) || (response.Entities.Media.Length == 0))
-            //        continue;
-
-            //    m_TweetLog.Enqueue(response);
-            //}
-
-            var responses = m_Tokens.Statuses.UserTimeline(since_id: m_LastResponseID);
-
-            TextTimeline.Clear();
+            var responses = m_Tokens.Statuses.UserTimeline(since_id: m_LastResponseID, count: 20);
             foreach (var response in responses) {
-                if (response.User != null) {
+                if ((response.ExtendedEntities?.Media　!= null) && (response.ExtendedEntities?.Media.Count() > 0)) {
+                    TweetView.Status = response;
+                    break;
                 }
-
-                //if ((response.Entities.Media != null) && (response.Entities.Media.Length > 0)) {
-                //    MediaEntity media = response.Entities.Media[0];
-                //    TextTimeline.AppendText($"DisplayURL: { media.DisplayUrl }{ Environment.NewLine }");
-                //    TextTimeline.AppendText($"ExpandedURL: { media.ExpandedUrl }{ Environment.NewLine }");
-                //    TextTimeline.AppendText($"MediaURL: { media.MediaUrl }{ Environment.NewLine }");
-                //    TextTimeline.AppendText($"MediaURLHttps: { media.MediaUrlHttps }{ Environment.NewLine }");
-                //    TextTimeline.AppendText($"URL: { media.Url }{ Environment.NewLine }");
-                //    break;
-                //}
-
-                //TextTimeline.AppendText($"----------{ Environment.NewLine }");
-                //TextTimeline.AppendText($"{ response.User.ScreenName }{ Environment.NewLine }");
-                //TextTimeline.AppendText($"{ response.Text }{ Environment.NewLine }");
-                //TextTimeline.AppendText($"{ Environment.NewLine }");
             }
 
             if (responses.Count > 0)
@@ -171,5 +148,7 @@ namespace Imetter
 
         private AuthorizeKeys.ApplicationKeys m_ApplicationKeys = null;
         private AuthorizeKeys.AccessKeys m_AccessKeys = null;
+
+        private List<CtrlTweetView> m_TweetViewList = new List<CtrlTweetView>();
     }
 }
