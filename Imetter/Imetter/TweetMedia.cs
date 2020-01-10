@@ -2,31 +2,30 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 
 namespace Imetter
 {
     delegate void MediaReadyEvent(ITweetMedia inMedia);
 
-    enum TweetMediaType
+    public enum TweetMediaType
     {
         Unknown,
         Image,
         Video
     }
 
-    interface ITweetMedia
+    public interface ITweetMedia
     {
         TweetMediaType MediaType { get; }
         long ID { get; }
         string URL { get; }
+        Image Thumbnail { get; }
     }
 
-    interface ITweetImageMedia
+    public interface ITweetImageMedia
     {
-        Image Image { get; }
-        Image Thumbnail { get; }
+        Image Image { get; }        
     }
 
     abstract class TweetMedia : ITweetMedia
@@ -88,6 +87,9 @@ namespace Imetter
 
         public abstract TweetMediaType MediaType
         { get; }
+        Image ITweetMedia.Thumbnail => Thumbnail;
+        public Bitmap Thumbnail
+        { get; protected set; } = null;
         protected MediaEntity RawData
         { get; private set; } = null;
         public long ID
@@ -109,10 +111,7 @@ namespace Imetter
 
             public override TweetMediaType MediaType => TweetMediaType.Image;
             Image ITweetImageMedia.Image => Image;
-            Image ITweetImageMedia.Thumbnail => Thumbnail;
             public Bitmap Image
-            { get; private set; } = null;
-            public Bitmap Thumbnail
             { get; private set; } = null;
 
             protected override void LoadResource(MediaReadyEvent inEvent)
@@ -136,6 +135,8 @@ namespace Imetter
                         }
                     }
 
+                    // now, can not clip thumbnail correctly
+                    //Thumbnail = Image.Clone(new Rectangle(new Point(), Image.Size), Image.PixelFormat);
                     inEvent?.Invoke(this);
                 });
                 return;
