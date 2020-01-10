@@ -13,6 +13,8 @@ namespace Imetter
 {
     public partial class CtrlMediaContentListView : UserControl
     {
+        public event MediaMouseClickEvent OnMouseClickMedia;
+
         public CtrlMediaContentListView()
         {
             InitializeComponent();
@@ -35,6 +37,7 @@ namespace Imetter
                         CtrlMediaContentView view = new CtrlMediaContentView();
                         view.Parent = this;
                         view.MediaEntity = entity;
+                        view.OnMouseClickMedia += View_OnMouseClickMedia;
                         m_ContentViewList.Add(view);
                     }
                 }
@@ -77,6 +80,12 @@ namespace Imetter
             LayoutPanel.SetCellPosition(inControl, new TableLayoutPanelCellPosition(inCol, inRow));
             LayoutPanel.SetRowSpan(inControl, inRowSpan);
             LayoutPanel.SetColumnSpan(inControl, inColSpan);
+            return;
+        }
+
+        private void View_OnMouseClickMedia(object inSender, IMediaMouseClickEventArgs inMedia)
+        {
+            OnMouseClickMedia?.Invoke(inSender, inMedia);
             return;
         }
 

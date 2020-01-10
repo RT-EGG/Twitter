@@ -6,6 +6,8 @@ namespace Imetter
 {
     public partial class CtrlTweetView : UserControl
     {
+        public event MediaMouseClickEvent OnMouseClickTweetMedia;
+
         public CtrlTweetView()
         {
             InitializeComponent();
@@ -36,21 +38,12 @@ namespace Imetter
             }
         }
 
+        private void ContentsView_OnMouseClickMedia(object inSender, IMediaMouseClickEventArgs inMedia)
+        {
+            OnMouseClickTweetMedia?.Invoke(inSender, inMedia);
+            return;
+        }
+
         private Status m_Status = null;
-
-        private void ContentsView_MouseClick(object sender, MouseEventArgs e)
-        {
-            Control clicked = ContentsView.GetChildAtPoint(e.Location);
-        }
-
-        private void ContentsView_Click(object sender, EventArgs e)
-        {
-            return;
-        }
-
-        private void ContentsView_MouseDown(object sender, MouseEventArgs e)
-        {
-            return;
-        }
     }
 }

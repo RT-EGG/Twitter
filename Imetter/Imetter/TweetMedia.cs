@@ -23,7 +23,7 @@ namespace Imetter
         Image Thumbnail { get; }
     }
 
-    public interface ITweetImageMedia
+    public interface ITweetImageMedia : ITweetMedia
     {
         Image Image { get; }        
     }
@@ -136,7 +136,7 @@ namespace Imetter
                     }
 
                     // now, can not clip thumbnail correctly
-                    //Thumbnail = Image.Clone(new Rectangle(new Point(), Image.Size), Image.PixelFormat);
+                    Thumbnail = Image.Clone(new Rectangle(new Point(), Image.Size), Image.PixelFormat);
                     inEvent?.Invoke(this);
                 });
                 return;

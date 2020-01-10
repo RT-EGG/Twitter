@@ -97,10 +97,17 @@
       <DependentUpon>FormUserPincodeQuery.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageDownloader.cs" />
+    <Compile Include="MediaDisplayPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MediaDisplayPanel.Designer.cs">
+      <DependentUpon>MediaDisplayPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TweetMedia.cs" />
     <Compile Include="TweetMediaLog.cs" />
+    <Compile Include="TweetMediaPlayer.cs" />
     <Compile Include="UserProfileImages.cs" />
     <EmbeddedResource Include="CtrlMediaContentListView.resx">
       <DependentUpon>CtrlMediaContentListView.cs</DependentUpon>
@@ -122,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormUserPincodeQuery.resx">
       <DependentUpon>FormUserPincodeQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MediaDisplayPanel.resx">
+      <DependentUpon>MediaDisplayPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -127,7 +127,7 @@ namespace Imetter
 
         private void UpdateTimeline()
         {
-            var responses = m_Tokens.Statuses.UserTimeline(since_id: m_LastResponseID, count: 20);
+            var responses = m_Tokens.Statuses.UserTimeline(since_id: m_LastResponseID, count: 100, include_rts: false, exclude_replies: true);
             foreach (var response in responses) {
                 if ((response.ExtendedEntities?.Media　!= null) && (response.ExtendedEntities?.Media.Count() > 0)) {
                     TweetView.Status = response;
@@ -138,6 +138,22 @@ namespace Imetter
             if (responses.Count > 0)
                 m_LastResponseID = responses.First().Id;
 
+            return;
+        }
+
+        private void TweetView_OnMouseClickTweetMedia(object inSender, IMediaMouseClickEventArgs inMedia)
+        {
+            PanelMediaDisplay.Media = inMedia.Media;
+            PanelMediaDisplay.Visible = PanelMediaDisplay.Media != null;
+            return;
+        }
+
+        private void FormMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (PanelMediaDisplay.Visible) {
+                PanelMediaDisplay.Media = null;
+                PanelMediaDisplay.Visible = false;
+            }
             return;
         }
 

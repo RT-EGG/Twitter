@@ -50,7 +50,7 @@ namespace Imetter
                 MediaMouseClickEventArgs args = new MediaMouseClickEventArgs(e);
                 args.Media = Media;
 
-                OnMouseClickMedia?.Invoke(args);
+                OnMouseClickMedia?.Invoke(this, args);
             }
             return;
         }
@@ -89,7 +89,7 @@ namespace Imetter
         ITweetMedia Media { get; }
     }
 
-    public interface IMediaMouseClickEventArgs
+    public interface IMediaMouseClickEventArgs : IMediaClickEventArgs
     {
 
     }
@@ -114,5 +114,5 @@ namespace Imetter
         { get; set; } = null;
     }
 
-    public delegate void MediaMouseClickEvent(IMediaMouseClickEventArgs inMedia);
+    public delegate void MediaMouseClickEvent(object inSender, IMediaMouseClickEventArgs inMedia);
 }
