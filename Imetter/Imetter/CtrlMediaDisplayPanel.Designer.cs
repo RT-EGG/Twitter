@@ -1,6 +1,6 @@
 ﻿namespace Imetter
 {
-    partial class CtrlMediaContentView
+    partial class CtrlMediaDisplayPanel
     {
         /// <summary> 
         /// 必要なデザイナー変数です。
@@ -29,16 +29,12 @@
         {
             this.SuspendLayout();
             // 
-            // CtrlMediaContentView
+            // MediaDisplayPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "CtrlMediaContentView";
-            this.Size = new System.Drawing.Size(419, 351);
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CtrlMediaContentView_MouseClick);
+            this.Name = "MediaDisplayPanel";
+            this.Size = new System.Drawing.Size(680, 598);
             this.ResumeLayout(false);
 
         }

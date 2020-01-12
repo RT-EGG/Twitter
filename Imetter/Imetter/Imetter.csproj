@@ -54,17 +54,23 @@
   <ItemGroup>
     <Compile Include="AuthorizeKeys.cs" />
     <Compile Include="CollectionExtension.cs" />
-    <Compile Include="CtrlMediaContentListView.cs">
+    <Compile Include="CtrlImageView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CtrlMediaContentListView.Designer.cs">
-      <DependentUpon>CtrlMediaContentListView.cs</DependentUpon>
+    <Compile Include="CtrlImageView.Designer.cs">
+      <DependentUpon>CtrlImageView.cs</DependentUpon>
     </Compile>
-    <Compile Include="CtrlMediaContentView.cs">
+    <Compile Include="CtrlMediaThumbnailListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CtrlMediaContentView.Designer.cs">
-      <DependentUpon>CtrlMediaContentView.cs</DependentUpon>
+    <Compile Include="CtrlMediaThumbnailListView.Designer.cs">
+      <DependentUpon>CtrlMediaThumbnailListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CtrlMediaThumbnailView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CtrlMediaThumbnailView.Designer.cs">
+      <DependentUpon>CtrlMediaThumbnailView.cs</DependentUpon>
     </Compile>
     <Compile Include="CtrlTweetView.cs">
       <SubType>UserControl</SubType>
@@ -97,11 +103,11 @@
       <DependentUpon>FormUserPincodeQuery.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageDownloader.cs" />
-    <Compile Include="MediaDisplayPanel.cs">
+    <Compile Include="CtrlMediaDisplayPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MediaDisplayPanel.Designer.cs">
-      <DependentUpon>MediaDisplayPanel.cs</DependentUpon>
+    <Compile Include="CtrlMediaDisplayPanel.Designer.cs">
+      <DependentUpon>CtrlMediaDisplayPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,11 +115,11 @@
     <Compile Include="TweetMediaLog.cs" />
     <Compile Include="TweetMediaPlayer.cs" />
     <Compile Include="UserProfileImages.cs" />
-    <EmbeddedResource Include="CtrlMediaContentListView.resx">
-      <DependentUpon>CtrlMediaContentListView.cs</DependentUpon>
+    <EmbeddedResource Include="CtrlMediaThumbnailListView.resx">
+      <DependentUpon>CtrlMediaThumbnailListView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CtrlMediaContentView.resx">
-      <DependentUpon>CtrlMediaContentView.cs</DependentUpon>
+    <EmbeddedResource Include="CtrlMediaThumbnailView.resx">
+      <DependentUpon>CtrlMediaThumbnailView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CtrlTweetView.resx">
       <DependentUpon>CtrlTweetView.cs</DependentUpon>
@@ -130,8 +136,8 @@
     <EmbeddedResource Include="FormUserPincodeQuery.resx">
       <DependentUpon>FormUserPincodeQuery.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MediaDisplayPanel.resx">
-      <DependentUpon>MediaDisplayPanel.cs</DependentUpon>
+    <EmbeddedResource Include="CtrlMediaDisplayPanel.resx">
+      <DependentUpon>CtrlMediaDisplayPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

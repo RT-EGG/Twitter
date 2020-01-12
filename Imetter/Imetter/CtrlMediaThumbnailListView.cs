@@ -11,11 +11,11 @@ using CoreTweet;
 
 namespace Imetter
 {
-    public partial class CtrlMediaContentListView : UserControl
+    public partial class CtrlMediaThumbnailListView : UserControl
     {
         public event MediaMouseClickEvent OnMouseClickMedia;
 
-        public CtrlMediaContentListView()
+        public CtrlMediaThumbnailListView()
         {
             InitializeComponent();
         }
@@ -34,7 +34,7 @@ namespace Imetter
                                 continue;
                         }
 
-                        CtrlMediaContentView view = new CtrlMediaContentView();
+                        CtrlMediaThumbnailView view = new CtrlMediaThumbnailView();
                         view.Parent = this;
                         view.MediaEntity = entity;
                         view.OnMouseClickMedia += View_OnMouseClickMedia;
@@ -89,6 +89,6 @@ namespace Imetter
             return;
         }
 
-        private List<CtrlMediaContentView> m_ContentViewList = new List<CtrlMediaContentView>();
+        private List<CtrlMediaThumbnailView> m_ContentViewList = new List<CtrlMediaThumbnailView>();
     }
 }

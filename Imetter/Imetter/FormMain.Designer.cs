@@ -30,7 +30,7 @@
             this.components = new System.ComponentModel.Container();
             this.ButtonUpdateTimeline = new System.Windows.Forms.Button();
             this.RequestTimer = new System.Windows.Forms.Timer(this.components);
-            this.PanelMediaDisplay = new Imetter.MediaDisplayPanel();
+            this.PanelMediaDisplay = new Imetter.CtrlMediaDisplayPanel();
             this.TweetView = new Imetter.CtrlTweetView();
             this.SuspendLayout();
             // 
@@ -97,7 +97,7 @@
         private System.Windows.Forms.Button ButtonUpdateTimeline;
         private System.Windows.Forms.Timer RequestTimer;
         private CtrlTweetView TweetView;
-        private MediaDisplayPanel PanelMediaDisplay;
+        private CtrlMediaDisplayPanel PanelMediaDisplay;
     }
 }
 

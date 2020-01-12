@@ -5,7 +5,7 @@ using CoreTweet;
 
 namespace Imetter
 {
-    public partial class CtrlMediaContentView : UserControl
+    public partial class CtrlMediaThumbnailView : UserControl
     {
         // interface
         public event MediaMouseClickEvent OnMouseClickMedia;
@@ -18,7 +18,7 @@ namespace Imetter
             return GetMediaRect().Contains(inPoint);
         }
 
-        public CtrlMediaContentView()
+        public CtrlMediaThumbnailView()
         {
             InitializeComponent();
         }
@@ -33,7 +33,7 @@ namespace Imetter
                         Media = inMedia;
                         switch (Media.MediaType) {
                             case TweetMediaType.Image:
-                                this.BackgroundImage = (Media as ITweetImageMedia).Image;
+                                //this.BackgroundImage = (Media as ITweetImageMedia).Image;
                                 break;
                             default:
                                 break;
@@ -42,6 +42,18 @@ namespace Imetter
                 }
                 return;
             }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            if ((Media != null) && (Media is ITweetImageMedia)) {
+                ITweetImageMedia imMedia = Media as ITweetImageMedia;
+                if (imMedia.Image != null)
+                    e.Graphics.DrawImage(imMedia.Image, e.ClipRectangle);
+            }            
+
+            return;
         }
 
         private void CtrlMediaContentView_MouseClick(object sender, MouseEventArgs e)

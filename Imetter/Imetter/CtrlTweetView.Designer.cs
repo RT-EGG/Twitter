@@ -29,7 +29,7 @@
         {
             this.LabelTweetText = new System.Windows.Forms.Label();
             this.PanelAction = new System.Windows.Forms.TableLayoutPanel();
-            this.ContentsView = new Imetter.CtrlMediaContentListView();
+            this.ContentsView = new Imetter.CtrlMediaThumbnailListView();
             this.UserInfo = new Imetter.CtrlUserInfoView();
             this.SuspendLayout();
             // 
@@ -100,7 +100,7 @@
 
         #endregion
         private System.Windows.Forms.Label LabelTweetText;
-        private CtrlMediaContentListView ContentsView;
+        private CtrlMediaThumbnailListView ContentsView;
         private System.Windows.Forms.TableLayoutPanel PanelAction;
         private CtrlUserInfoView UserInfo;
     }

@@ -1,6 +1,6 @@
 ﻿namespace Imetter
 {
-    partial class CtrlMediaContentListView
+    partial class CtrlMediaThumbnailListView
     {
         /// <summary> 
         /// 必要なデザイナー変数です。

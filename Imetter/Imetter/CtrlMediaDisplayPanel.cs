@@ -2,9 +2,9 @@
 
 namespace Imetter
 {
-    public partial class MediaDisplayPanel : UserControl
+    public partial class CtrlMediaDisplayPanel : UserControl
     {
-        public MediaDisplayPanel()
+        public CtrlMediaDisplayPanel()
         {
             InitializeComponent();
         }
