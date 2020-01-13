@@ -15,7 +15,7 @@ namespace Imetter
             if (Media == null)
                 return false;
 
-            return DisplayRectangle.Contains(inPoint);
+            return ImageDisplayRectangle.Contains(inPoint);
         }
 
         public CtrlMediaThumbnailView()

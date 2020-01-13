@@ -52,23 +52,6 @@ namespace Imetter
                 return;
             }
 
-            public override void DisplayTo(Control inDisplay)
-            {
-                base.DisplayTo(inDisplay);
-
-                //View.Parent = inDisplay;
-                //View.Dock = DockStyle.Fill;
-                return;
-            }
-
-            public override void UnDisplay(Control inDisplay)
-            {
-                base.UnDisplay(inDisplay);
-
-                //View.Parent = null;
-                return;
-            }
-
             public override void Paint(Control inDisplay, Graphics inTarget)
             {
                 base.Paint(inDisplay, inTarget);

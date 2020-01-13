@@ -21,6 +21,14 @@ namespace Imetter
         }
         public ImagePaintOption PaintOption
         { get; set; } = new ImagePaintOption();
+        public Rectangle ImageDisplayRectangle
+        { 
+            get {
+                if (Image == null)
+                    return new Rectangle();
+                return PaintOption.CalcImageDisplayRectangle(this.Size, Image.Size);
+            } 
+        }
 
         public  class ImagePaintOption
         {
