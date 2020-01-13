@@ -37,11 +37,10 @@
             // ButtonUpdateTimeline
             // 
             this.ButtonUpdateTimeline.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ButtonUpdateTimeline.Location = new System.Drawing.Point(4, 4);
-            this.ButtonUpdateTimeline.Margin = new System.Windows.Forms.Padding(4);
-            this.ButtonUpdateTimeline.MaximumSize = new System.Drawing.Size(267, 625);
+            this.ButtonUpdateTimeline.Location = new System.Drawing.Point(3, 3);
+            this.ButtonUpdateTimeline.MaximumSize = new System.Drawing.Size(200, 500);
             this.ButtonUpdateTimeline.Name = "ButtonUpdateTimeline";
-            this.ButtonUpdateTimeline.Size = new System.Drawing.Size(267, 31);
+            this.ButtonUpdateTimeline.Size = new System.Drawing.Size(200, 25);
             this.ButtonUpdateTimeline.TabIndex = 1;
             this.ButtonUpdateTimeline.Text = "Update";
             this.ButtonUpdateTimeline.UseVisualStyleBackColor = true;
@@ -54,38 +53,38 @@
             // 
             // PanelMediaDisplay
             // 
-            this.PanelMediaDisplay.BackColor = System.Drawing.Color.Transparent;
+            this.PanelMediaDisplay.BackColor = System.Drawing.SystemColors.Control;
             this.PanelMediaDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelMediaDisplay.Location = new System.Drawing.Point(4, 35);
+            this.PanelMediaDisplay.Location = new System.Drawing.Point(3, 28);
+            this.PanelMediaDisplay.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.PanelMediaDisplay.Media = null;
             this.PanelMediaDisplay.Name = "PanelMediaDisplay";
-            this.PanelMediaDisplay.Size = new System.Drawing.Size(797, 546);
+            this.PanelMediaDisplay.Size = new System.Drawing.Size(598, 437);
             this.PanelMediaDisplay.TabIndex = 5;
             this.PanelMediaDisplay.Visible = false;
             // 
             // TweetView
             // 
             this.TweetView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TweetView.Location = new System.Drawing.Point(4, 35);
-            this.TweetView.Margin = new System.Windows.Forms.Padding(5);
+            this.TweetView.Location = new System.Drawing.Point(3, 28);
+            this.TweetView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TweetView.Name = "TweetView";
-            this.TweetView.Size = new System.Drawing.Size(797, 546);
+            this.TweetView.Size = new System.Drawing.Size(598, 437);
             this.TweetView.Status = null;
             this.TweetView.TabIndex = 3;
             this.TweetView.OnMouseClickTweetMedia += new Imetter.MediaMouseClickEvent(this.TweetView_OnMouseClickTweetMedia);
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(805, 585);
+            this.ClientSize = new System.Drawing.Size(604, 468);
             this.Controls.Add(this.PanelMediaDisplay);
             this.Controls.Add(this.TweetView);
             this.Controls.Add(this.ButtonUpdateTimeline);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormMain";
-            this.Padding = new System.Windows.Forms.Padding(4);
+            this.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Text = "Form1";
             this.Shown += new System.EventHandler(this.FormMain_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);

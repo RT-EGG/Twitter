@@ -145,6 +145,7 @@ namespace Imetter
         {
             PanelMediaDisplay.Media = inMedia.Media;
             PanelMediaDisplay.Visible = PanelMediaDisplay.Media != null;
+            TweetView.Visible = !PanelMediaDisplay.Visible;
             return;
         }
 
@@ -154,6 +155,7 @@ namespace Imetter
                 PanelMediaDisplay.Media = null;
                 PanelMediaDisplay.Visible = false;
             }
+            TweetView.Visible = !PanelMediaDisplay.Visible;
             return;
         }
 

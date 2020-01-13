@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using System.Drawing;
 
 namespace Imetter
 {
@@ -25,12 +26,17 @@ namespace Imetter
 
         public virtual void DisplayTo(Control inDisplay)
         {
-
+            return;
         }
 
         public virtual void UnDisplay(Control inDisplay)
         {
+            return;
+        }
 
+        public virtual void Paint(Control inDisplay, Graphics inTarget)
+        {
+            return;
         }
 
         public ITweetMedia Media
@@ -41,6 +47,8 @@ namespace Imetter
             public TweetImageMediaPlayer(ITweetImageMedia inImageMedia)
                 : base(inImageMedia)
             {
+                if (Media != null)
+                    View.Image = Media.Image;
                 return;
             }
 
@@ -48,8 +56,8 @@ namespace Imetter
             {
                 base.DisplayTo(inDisplay);
 
-                inDisplay.BackgroundImageLayout = ImageLayout.Zoom;
-                inDisplay.BackgroundImage = Media.Image;
+                //View.Parent = inDisplay;
+                //View.Dock = DockStyle.Fill;
                 return;
             }
 
@@ -57,12 +65,27 @@ namespace Imetter
             {
                 base.UnDisplay(inDisplay);
 
-                inDisplay.BackgroundImage = null;
+                //View.Parent = null;
+                return;
+            }
+
+            public override void Paint(Control inDisplay, Graphics inTarget)
+            {
+                base.Paint(inDisplay, inTarget);
+
+                if (Media.Image != null) {
+                    CtrlImageView.ImagePaintOption options = new CtrlImageView.ImagePaintOption();
+                    options.BackColor = inDisplay.BackColor;
+                    CtrlImageView.PaintTo(inDisplay, inTarget, Media.Image, options);
+                }
                 return;
             }
 
             public new ITweetImageMedia Media
             { get { return base.Media as ITweetImageMedia; } }
+
+            private CtrlImageView View
+            { get; } = new CtrlImageView();
         }
     }
 }

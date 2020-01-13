@@ -28,6 +28,15 @@ namespace Imetter
             }
         }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+
+            if (MediaPlayer != null)
+                MediaPlayer.Paint(this, e.Graphics);
+            return;
+        }
+
         private ITweetMedia m_Media = null;
         private TweetMediaPlayer MediaPlayer
         { get; set; } = null;
