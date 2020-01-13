@@ -27,10 +27,8 @@ namespace Imetter
 
                     string text = Status.Text;
                     if (Status.ExtendedEntities?.Media?.Length > 0) {
-                        for (int i = Status.ExtendedEntities.Media.Length - 1; i >= 0; --i) {
-                            var media = Status.ExtendedEntities.Media[i];
-                            text = text.Remove(media.Indices[0], media.Indices[1] - media.Indices[0]);
-                        }
+                        var media = Status.ExtendedEntities.Media[0];
+                        text = text.Remove(media.Indices[0], media.Indices[1] - media.Indices[0]);
                     }
                     LabelTweetText.Text = text;
                 }
