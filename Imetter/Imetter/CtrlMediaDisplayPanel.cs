@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace Imetter
 {
@@ -34,6 +35,13 @@ namespace Imetter
 
             if (MediaPlayer != null)
                 MediaPlayer.Paint(this, e.Graphics);
+            return;
+        }
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            Invalidate();
             return;
         }
 

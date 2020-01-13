@@ -29,12 +29,13 @@
         {
             this.SuspendLayout();
             // 
-            // MediaDisplayPanel
+            // CtrlMediaDisplayPanel
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "MediaDisplayPanel";
-            this.Size = new System.Drawing.Size(680, 598);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Name = "CtrlMediaDisplayPanel";
+            this.Size = new System.Drawing.Size(510, 478);
             this.ResumeLayout(false);
 
         }
