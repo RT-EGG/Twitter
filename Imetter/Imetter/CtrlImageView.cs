@@ -32,7 +32,7 @@ namespace Imetter
 
         public  class ImagePaintOption
         {
-            public Color BackColor = Color.Gray;
+            public Color BackColor = Color.Transparent;
             public bool LimitToOriginalSize = true;
             //public Padding Padding = new Padding(0);
 

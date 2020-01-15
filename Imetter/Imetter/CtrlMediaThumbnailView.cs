@@ -46,7 +46,7 @@ namespace Imetter
 
         private void CtrlMediaContentView_MouseClick(object sender, MouseEventArgs e)
         {
-            if (ContainsInThumbnail(e.Location)) {
+            if (/*ContainsInThumbnail(e.Location)*/true) {
                 MediaMouseClickEventArgs args = new MediaMouseClickEventArgs(e);
                 args.Media = Media;
 
