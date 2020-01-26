@@ -132,8 +132,8 @@ namespace AutoReplier
         {
             TimeSpan offset = DateTimeOffset.Now.Subtract(inStatus.CreatedAt);
             if (offset.TotalMinutes < 1) {
-                if (inStatus.Text == "てす") {
-                    m_Tokens.Statuses.Update(new { status = "びゃー" });
+                if (inStatus.Text == "おっ") {
+                    m_Tokens.Statuses.Update(new { status = "ぱい" });
                 }
             }
             
