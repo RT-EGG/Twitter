@@ -1,7 +1,7 @@
-﻿using CoreTweet;
-using System;
+﻿using System;
 using System.Net;
 using System.Windows.Forms;
+using CoreTweet;
 
 namespace AutoReplier
 {
@@ -30,17 +30,17 @@ namespace AutoReplier
                     m_ApplicationKeys.ConsumerSecret = input.SecretKey;
 
                     try {
-                        m_Session = OAuth.Authorize(m_ApplicationKeys.ConsumerKey, m_ApplicationKeys.ConsumerSecret);
+                        Session = OAuth.Authorize(m_ApplicationKeys.ConsumerKey, m_ApplicationKeys.ConsumerSecret);
 
                     } catch (Exception e) {
                         Console.WriteLine(e.Message);
                     }
-                } while (m_Session == null);
+                } while (Session == null);
 
                 m_ApplicationKeys.ExportToFile("autapp");
 
             } else {
-                m_Session = OAuth.Authorize(m_ApplicationKeys.ConsumerKey, m_ApplicationKeys.ConsumerSecret);
+                Session = OAuth.Authorize(m_ApplicationKeys.ConsumerKey, m_ApplicationKeys.ConsumerSecret);
             }
 
             return true;
@@ -51,44 +51,44 @@ namespace AutoReplier
             m_AccessKeys = AuthorizeKeys.LoadFromFile<AuthorizeKeys.AccessKeys>("autacc");
             if (m_AccessKeys == null) {
                 m_AccessKeys = new AuthorizeKeys.AccessKeys();
-                FormUserPincodeQuery input = new FormUserPincodeQuery(m_Session);
+                FormUserPincodeQuery input = new FormUserPincodeQuery(Session);
 
                 do {
                     if (input.ShowDialog() != DialogResult.OK)
                         return false;
 
                     try {
-                        m_Tokens = OAuth.GetTokens(m_Session, input.Pincode);
-                        m_AccessKeys.AccessToken = m_Tokens.AccessToken;
-                        m_AccessKeys.AccessSecret = m_Tokens.AccessTokenSecret;
+                        Tokens = OAuth.GetTokens(Session, input.Pincode);
+                        m_AccessKeys.AccessToken = Tokens.AccessToken;
+                        m_AccessKeys.AccessSecret = Tokens.AccessTokenSecret;
 
                     } catch (Exception e) {
                         Console.Write(e.Message);
                     }
 
-                } while (m_Tokens == null);
+                } while (Tokens == null);
 
                 m_AccessKeys.ExportToFile("autacc");
 
             } else {
-                m_Tokens = Tokens.Create(m_ApplicationKeys.ConsumerKey,
+                Tokens = Tokens.Create(m_ApplicationKeys.ConsumerKey,
                                          m_ApplicationKeys.ConsumerSecret,
                                          m_AccessKeys.AccessToken,
                                          m_AccessKeys.AccessSecret);
 
-                m_Session.RequestToken = m_AccessKeys.AccessToken;
-                m_Session.RequestTokenSecret = m_AccessKeys.AccessSecret;
+                Session.RequestToken = m_AccessKeys.AccessToken;
+                Session.RequestTokenSecret = m_AccessKeys.AccessSecret;
 
                 try {
-                    m_User = m_Tokens.Account.VerifyCredentials();
+                    User = Tokens.Account.VerifyCredentials();
 
                     // if target user is locked account, can't be polled by filter stream.
                     bool targetIsLockedAccount = false;
                     if (!targetIsLockedAccount) {
-                        FilterStreamMonitor monitor = new FilterStreamMonitor(m_Tokens, new string[] { TargetUserID });
+                        FilterStreamMonitor monitor = new FilterStreamMonitor(Tokens, new string[] { TargetUserID });
                         m_TweetMonitor = monitor;
                     } else {
-                        TimelineStreamMonitor monitor = new TimelineStreamMonitor(m_Tokens, TargetUserID);
+                        TimelineStreamMonitor monitor = new TimelineStreamMonitor(Tokens, TargetUserID);
                         monitor.UpdateInterval = 2;
                         m_TweetMonitor = monitor;
                     }
@@ -133,7 +133,7 @@ namespace AutoReplier
             TimeSpan offset = DateTimeOffset.Now.Subtract(inStatus.CreatedAt);
             if (offset.TotalMinutes < 1) {
                 if (inStatus.Text == "おっ") {
-                    m_Tokens.Statuses.Update(new { status = "ぱい" });
+                    Tokens.Statuses.Update(new { status = "ぱい" });
                 }
             }
             
@@ -154,13 +154,13 @@ namespace AutoReplier
             if (++m_RateLimitRequestSpan > 50) {
                 TextRateLimits.Clear();
 
-                var limits = m_Tokens.Application.RateLimitStatus()["statuses"];
+                var limits = Tokens.Application.RateLimitStatus()["statuses"];
                 TextRateLimits.AppendText($"-----{ "status" }-----{ Environment.NewLine }");
                 foreach (var limit in limits) {
                     TextRateLimits.AppendText($"-{ limit.Key }:{ limit.Value.Remaining }, { limit.Value.Limit }{ Environment.NewLine }");
                 }
 
-                limits = m_Tokens.Application.RateLimitStatus()["application"];
+                limits = Tokens.Application.RateLimitStatus()["application"];
                 TextRateLimits.AppendText($"-----{ "application" }-----{ Environment.NewLine }");
                 foreach (var limit in limits) {
                     TextRateLimits.AppendText($"-{ limit.Key }:{ limit.Value.Remaining }, { limit.Value.Limit }{ Environment.NewLine }");
@@ -205,11 +205,13 @@ namespace AutoReplier
         delegate void SafeCallDoReceiveError(Exception inException);
         delegate void SafeCallDoReceiveStatus(Status inStatus);
 
-        private OAuth.OAuthSession m_Session = null;
-        private Tokens m_Tokens = null;
-        private UserResponse m_User = null;
+        private OAuth.OAuthSession Session
+        { get; set; } = null;
+        private Tokens Tokens
+        { get; set; } = null;
+        private UserResponse User
+        { get; set; } = null;
 
-        private long? m_LastID = null;
         private int m_RateLimitRequestSpan = 0;
 
         private AuthorizeKeys.ApplicationKeys m_ApplicationKeys = null;
