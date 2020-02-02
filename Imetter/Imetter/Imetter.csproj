@@ -72,6 +72,12 @@
     <Compile Include="CtrlMediaThumbnailView.Designer.cs">
       <DependentUpon>CtrlMediaThumbnailView.cs</DependentUpon>
     </Compile>
+    <Compile Include="CtrlTweetLogView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CtrlTweetLogView.Designer.cs">
+      <DependentUpon>CtrlTweetLogView.cs</DependentUpon>
+    </Compile>
     <Compile Include="CtrlTweetView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -120,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CtrlMediaThumbnailView.resx">
       <DependentUpon>CtrlMediaThumbnailView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CtrlTweetLogView.resx">
+      <DependentUpon>CtrlTweetLogView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CtrlTweetView.resx">
       <DependentUpon>CtrlTweetView.cs</DependentUpon>
