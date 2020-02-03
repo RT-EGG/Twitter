@@ -32,9 +32,10 @@
             this.ButtonMoveNext = new System.Windows.Forms.Button();
             this.PanelTweetViewStage = new System.Windows.Forms.Panel();
             this.CtrlTweetView1 = new Imetter.CtrlTweetView();
-            this.CtrlTweetView2 = new Imetter.CtrlTweetView();
             this.TimerPanelAnimation = new System.Windows.Forms.Timer(this.components);
+            this.PanelTweetSlideView = new System.Windows.Forms.Panel();
             this.PanelTweetViewStage.SuspendLayout();
+            this.PanelTweetSlideView.SuspendLayout();
             this.SuspendLayout();
             // 
             // ButtonMovePrevious
@@ -67,8 +68,7 @@
             // 
             // PanelTweetViewStage
             // 
-            this.PanelTweetViewStage.Controls.Add(this.CtrlTweetView2);
-            this.PanelTweetViewStage.Controls.Add(this.CtrlTweetView1);
+            this.PanelTweetViewStage.Controls.Add(this.PanelTweetSlideView);
             this.PanelTweetViewStage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelTweetViewStage.Location = new System.Drawing.Point(48, 0);
             this.PanelTweetViewStage.Name = "PanelTweetViewStage";
@@ -78,24 +78,26 @@
             // 
             // CtrlTweetView1
             // 
+            this.CtrlTweetView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CtrlTweetView1.Location = new System.Drawing.Point(0, 0);
             this.CtrlTweetView1.Name = "CtrlTweetView1";
-            this.CtrlTweetView1.Size = new System.Drawing.Size(490, 467);
+            this.CtrlTweetView1.Size = new System.Drawing.Size(484, 461);
             this.CtrlTweetView1.Status = null;
             this.CtrlTweetView1.TabIndex = 0;
-            // 
-            // CtrlTweetView2
-            // 
-            this.CtrlTweetView2.Location = new System.Drawing.Point(0, 0);
-            this.CtrlTweetView2.Name = "CtrlTweetView2";
-            this.CtrlTweetView2.Size = new System.Drawing.Size(490, 467);
-            this.CtrlTweetView2.Status = null;
-            this.CtrlTweetView2.TabIndex = 1;
             // 
             // TimerPanelAnimation
             // 
             this.TimerPanelAnimation.Interval = 10;
             this.TimerPanelAnimation.Tick += new System.EventHandler(this.TimerPanelAnimation_Tick);
+            // 
+            // PanelTweetSlideView
+            // 
+            this.PanelTweetSlideView.Controls.Add(this.CtrlTweetView1);
+            this.PanelTweetSlideView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelTweetSlideView.Location = new System.Drawing.Point(3, 3);
+            this.PanelTweetSlideView.Name = "PanelTweetSlideView";
+            this.PanelTweetSlideView.Size = new System.Drawing.Size(484, 461);
+            this.PanelTweetSlideView.TabIndex = 2;
             // 
             // CtrlTweetLogView
             // 
@@ -107,6 +109,7 @@
             this.Name = "CtrlTweetLogView";
             this.Size = new System.Drawing.Size(586, 467);
             this.PanelTweetViewStage.ResumeLayout(false);
+            this.PanelTweetSlideView.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -117,7 +120,7 @@
         private System.Windows.Forms.Button ButtonMoveNext;
         private System.Windows.Forms.Panel PanelTweetViewStage;
         private CtrlTweetView CtrlTweetView1;
-        private CtrlTweetView CtrlTweetView2;
         private System.Windows.Forms.Timer TimerPanelAnimation;
+        private System.Windows.Forms.Panel PanelTweetSlideView;
     }
 }

@@ -1,13 +1,8 @@
-﻿using System;
+﻿using CoreTweet;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CoreTweet;
 
 namespace Imetter
 {
@@ -20,75 +15,91 @@ namespace Imetter
             InitializeComponent();
         }
 
-        public IEnumerable<MediaEntity> Medias
+        public void MovePrevious()
         {
-            get { return null; }
+            if (!CanMovePrevious)
+                return;
+
+            --MediaIndex;
+            return;
+        }
+
+        public void MoveNext()
+        {
+            if (!CanMoveNext)
+                return;
+
+            ++MediaIndex;
+            return;
+        }
+
+        public bool CanMovePrevious
+        { get { return (Medias != null) && (MediaIndex > 0); } }
+
+        public bool CanMoveNext
+        { get { return (Medias != null) && (MediaIndex < (Medias.Count() - 1)); } }
+
+        public IList<MediaEntity> Medias
+        {
+            get { return m_Medias; }
             set {
-                m_ContentViewList.Clear();
-                if (value != null) {
-                    foreach (var entity in value) {
-                        switch (TweetMedia.GetMediaType(entity)) {
-                            case TweetMediaType.Image:
-                                break;
-                            default:
-                                continue;
-                        }
+                m_Medias = value;
 
-                        CtrlMediaThumbnailView view = new CtrlMediaThumbnailView();
-                        view.Parent = this;
-                        view.MediaEntity = entity;
-                        view.OnMouseClickMedia += View_OnMouseClickMedia;
-                        m_ContentViewList.Add(view);
-                    }
-                }
-
-                DoLayout();
+                if ((Medias != null) && (Medias.Count() > 0))
+                    MediaIndex = 0;
+                else
+                    MediaIndex = -1;
                 return;
             }
         }
 
-        private void DoLayout()
+        public int MediaIndex
         {
-            switch (m_ContentViewList.Count) {
-                case 1:
-                    SetLayout(m_ContentViewList[0], 0, 0, 2, 2);
-                    break;
-                case 2:
-                    SetLayout(m_ContentViewList[0], 0, 0, 2, 1);
-                    SetLayout(m_ContentViewList[1], 0, 1, 2, 1);
-                    break;
-                case 3:
-                    SetLayout(m_ContentViewList[0], 0, 0, 2, 1);
-                    SetLayout(m_ContentViewList[1], 0, 1, 1, 1);
-                    SetLayout(m_ContentViewList[2], 1, 1, 1, 1);
-                    break;
-                case 4:
-                    SetLayout(m_ContentViewList[0], 0, 0, 1, 1);
-                    SetLayout(m_ContentViewList[1], 0, 1, 1, 1);
-                    SetLayout(m_ContentViewList[2], 1, 0, 1, 1);
-                    SetLayout(m_ContentViewList[3], 1, 1, 1, 1);
-                    break;
+            get { return m_MediaIndex; }
+            set {
+                m_MediaIndex = value;
+                if (Medias == null)
+                    m_MediaIndex = -1;
+
+                if (MediaIndex == -1) {
+                    ThumbnailView.MediaEntity = null;
+
+                    ButtonMovePrevious.Enabled = false;
+                    ButtonMoveNext.Enabled = false;
+                    LabelMediaIndex.Visible = false;
+
+                } else {
+                    m_MediaIndex = Math.Min(Medias.Count() - 1, Math.Max(0, m_MediaIndex));
+                    ThumbnailView.MediaEntity = m_Medias[m_MediaIndex];
+
+                    ButtonMovePrevious.Enabled = m_MediaIndex > 0;
+                    ButtonMoveNext.Enabled = m_MediaIndex < (Medias.Count() - 1);
+                    LabelMediaIndex.Visible = true;
+                    LabelMediaIndex.Text = $"{ m_MediaIndex + 1 } / { Medias.Count() }";
+                }
+                return;
             }
-
-            return;
         }
 
-        private void SetLayout(Control inControl, int inRow, int inCol, int inRowSpan, int inColSpan)
-        {
-            inControl.Parent = LayoutPanel;
-            inControl.Dock = DockStyle.Fill;
-            LayoutPanel.SetCellPosition(inControl, new TableLayoutPanelCellPosition(inCol, inRow));
-            LayoutPanel.SetRowSpan(inControl, inRowSpan);
-            LayoutPanel.SetColumnSpan(inControl, inColSpan);
-            return;
-        }
-
-        private void View_OnMouseClickMedia(object inSender, IMediaMouseClickEventArgs inMedia)
+        private void ThumbnailView_OnMouseClickMedia(object inSender, IMediaMouseClickEventArgs inMedia)
         {
             OnMouseClickMedia?.Invoke(inSender, inMedia);
             return;
         }
 
-        private List<CtrlMediaThumbnailView> m_ContentViewList = new List<CtrlMediaThumbnailView>();
+        private IList<MediaEntity> m_Medias = null;
+        private int m_MediaIndex = -1;
+
+        private void ButtonMovePrevious_Click(object sender, EventArgs e)
+        {
+            MovePrevious();
+            return;
+        }
+
+        private void ButtonMoveNext_Click(object sender, EventArgs e)
+        {
+            MoveNext();
+            return;
+        }
     }
 }

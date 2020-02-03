@@ -22,6 +22,8 @@ namespace Imetter
         {
             if (!CanMovePrevious)
                 return;
+
+            CtrlTweetView1.Status = TweetLog[--LogIndex];
             return;
         }
         
@@ -29,7 +31,14 @@ namespace Imetter
         {
             if (!CanMoveNext)
                 return;
+
+            CtrlTweetView1.Status = TweetLog[++LogIndex];
             return;
+        }
+
+        public void Remove()
+        {
+
         }
 
         public bool CanMovePrevious
