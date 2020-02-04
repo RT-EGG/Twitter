@@ -1,13 +1,7 @@
-﻿using System;
+﻿using CoreTweet;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CoreTweet;
 
 namespace Imetter
 {
@@ -23,7 +17,7 @@ namespace Imetter
             if (!CanMovePrevious)
                 return;
 
-            CtrlTweetView1.Status = TweetLog[--LogIndex];
+            LogIndex += 1;
             return;
         }
         
@@ -32,20 +26,15 @@ namespace Imetter
             if (!CanMoveNext)
                 return;
 
-            CtrlTweetView1.Status = TweetLog[++LogIndex];
+            LogIndex -= 1;
             return;
         }
 
-        public void Remove()
-        {
-
-        }
-
         public bool CanMovePrevious
-        { get { return (TweetLog != null) && (LogIndex > 0); } }
+        { get { return (TweetLog != null) && (LogIndex < (TweetLog.Count - 1)); } }
 
         public bool CanMoveNext
-        { get { return (TweetLog != null) && (LogIndex < (TweetLog.Count - 1)); } }
+        { get { return (TweetLog != null) && (LogIndex > 0); } }
 
         private void TimerPanelAnimation_Tick(object sender, EventArgs e)
         {
@@ -67,6 +56,15 @@ namespace Imetter
             return;
         }
 
+        protected override void OnInvalidated(InvalidateEventArgs e)
+        {
+            base.OnInvalidated(e);
+
+            ButtonMovePrevious.Enabled = CanMovePrevious;
+            ButtonMoveNext.Enabled = CanMoveNext;
+            return;
+        }
+
         public IList<Status> TweetLog
         { 
             get { return m_TweetLog; }
@@ -76,8 +74,20 @@ namespace Imetter
             }
         }
         public int LogIndex
-        { get; private set; } = -1;
+        { 
+            get { return m_LogIndex; }
+            set {
+                if (value < 0) {
+                    value = -1;
+                } else {
+
+                }
+
+                CtrlTweetView1.Status = (LogIndex == -1) ? null : TweetLog[LogIndex];
+            }
+        }
 
         private IList<Status> m_TweetLog = null;
+        private int m_LogIndex = -1;
     }
 }
