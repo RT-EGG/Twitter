@@ -39,7 +39,7 @@
             this.LabelTweetText.Dock = System.Windows.Forms.DockStyle.Top;
             this.LabelTweetText.Location = new System.Drawing.Point(0, 78);
             this.LabelTweetText.Name = "LabelTweetText";
-            this.LabelTweetText.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.LabelTweetText.Padding = new System.Windows.Forms.Padding(4);
             this.LabelTweetText.Size = new System.Drawing.Size(40, 23);
             this.LabelTweetText.TabIndex = 1;
             this.LabelTweetText.Text = "text";
@@ -66,8 +66,10 @@
             this.ContentsView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ContentsView.Location = new System.Drawing.Point(0, 101);
             this.ContentsView.Margin = new System.Windows.Forms.Padding(1);
+            this.ContentsView.MediaIndex = -1;
             this.ContentsView.Medias = null;
             this.ContentsView.Name = "ContentsView";
+            this.ContentsView.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ContentsView.Size = new System.Drawing.Size(705, 416);
             this.ContentsView.TabIndex = 2;
             this.ContentsView.OnMouseClickMedia += new Imetter.MediaMouseClickEvent(this.ContentsView_OnMouseClickMedia);
@@ -90,7 +92,7 @@
             this.Controls.Add(this.PanelAction);
             this.Controls.Add(this.LabelTweetText);
             this.Controls.Add(this.UserInfo);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CtrlTweetView";
             this.Size = new System.Drawing.Size(705, 588);
             this.ResumeLayout(false);

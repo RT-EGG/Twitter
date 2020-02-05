@@ -1,16 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
 using System.Windows.Forms;
 using CoreTweet;
-using System.Net;
-using System.IO;
 
 namespace Imetter
 {
@@ -85,15 +77,14 @@ namespace Imetter
                                          m_AccessKeys.AccessSecret);
                 try {
                     UserResponse user = m_Tokens.Account.VerifyCredentials();
-                    //UserInfoView.User = user;
+                    
+                    CreateNewFilterStream("Keyword");
 
-                    //WebClient client = new WebClient();
-                    //MemoryStream stream = new MemoryStream(client.DownloadData(user.ProfileImageUrlHttps));
-                    //Bitmap icon = new Bitmap(stream);
-                    //this.BackgroundImage = icon;
-
-                } catch /*(WebException e)*/ {
+                } catch (Exception e) /*(WebException e)*/ {
                     // can not authorize user by saved access tokens.
+                    Console.WriteLine(e.GetType().FullName);
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine(e.StackTrace);
                 }
 
                 
@@ -102,6 +93,20 @@ namespace Imetter
             }
 
             return true;
+        }
+
+        private void CreateNewFilterStream(string inKeyword)
+        {
+            if (m_TweetThreadView == null) {
+                m_TweetThreadView = new CtrlTweetThreadView(m_Tokens, inKeyword);
+                m_TweetThreadView.Parent = PanelThreadView; 
+                m_TweetThreadView.Dock = DockStyle.Fill;
+
+            } else {
+                m_TweetThreadView.Keyword = inKeyword;
+            }
+            
+            return;
         }
 
         private void FormMain_Shown(object sender, EventArgs e)
@@ -120,23 +125,18 @@ namespace Imetter
             return;
         }
 
-        private void RequestTimer_Tick(object sender, EventArgs e)
-        {
-
-        }
-
         private void UpdateTimeline()
         {
-            var responses = m_Tokens.Statuses.UserTimeline(since_id: m_LastResponseID, count: 100, include_rts: false, exclude_replies: true);
-            foreach (var response in responses) {
-                if ((response.ExtendedEntities?.Media　!= null) && (response.ExtendedEntities?.Media.Count() > 0)) {
-                    TweetView.Status = response;
-                    break;
-                }
-            }
+            //var responses = m_Tokens.Statuses.UserTimeline(since_id: m_LastResponseID, count: 100, include_rts: false, exclude_replies: true);
+            //foreach (var response in responses) {
+            //    if ((response.ExtendedEntities?.Media　!= null) && (response.ExtendedEntities?.Media.Count() > 0)) {
+            //        TweetView.Status = response;
+            //        break;
+            //    }
+            //}
 
-            if (responses.Count > 0)
-                m_LastResponseID = responses.First().Id;
+            //if (responses.Count > 0)
+            //    m_LastResponseID = responses.First().Id;
 
             return;
         }
@@ -145,7 +145,7 @@ namespace Imetter
         {
             PanelMediaDisplay.Media = inMedia.Media;
             PanelMediaDisplay.Visible = PanelMediaDisplay.Media != null;
-            TweetView.Visible = !PanelMediaDisplay.Visible;
+            //TweetView.Visible = !PanelMediaDisplay.Visible;
             return;
         }
 
@@ -155,7 +155,7 @@ namespace Imetter
                 PanelMediaDisplay.Media = null;
                 PanelMediaDisplay.Visible = false;
             }
-            TweetView.Visible = !PanelMediaDisplay.Visible;
+            //TweetView.Visible = !PanelMediaDisplay.Visible;
             return;
         }
 
@@ -168,5 +168,6 @@ namespace Imetter
         private AuthorizeKeys.AccessKeys m_AccessKeys = null;
 
         private List<CtrlTweetView> m_TweetViewList = new List<CtrlTweetView>();
+        private CtrlTweetThreadView m_TweetThreadView = null;
     }
 }

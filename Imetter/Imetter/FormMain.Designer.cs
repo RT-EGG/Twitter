@@ -27,64 +27,56 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.ButtonUpdateTimeline = new System.Windows.Forms.Button();
-            this.RequestTimer = new System.Windows.Forms.Timer(this.components);
+            this.PanelThreadView = new System.Windows.Forms.Panel();
             this.PanelMediaDisplay = new Imetter.CtrlMediaDisplayPanel();
-            this.TweetView = new Imetter.CtrlTweetView();
             this.SuspendLayout();
             // 
             // ButtonUpdateTimeline
             // 
             this.ButtonUpdateTimeline.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ButtonUpdateTimeline.Location = new System.Drawing.Point(3, 3);
-            this.ButtonUpdateTimeline.MaximumSize = new System.Drawing.Size(200, 500);
+            this.ButtonUpdateTimeline.Location = new System.Drawing.Point(4, 4);
+            this.ButtonUpdateTimeline.Margin = new System.Windows.Forms.Padding(4);
+            this.ButtonUpdateTimeline.MaximumSize = new System.Drawing.Size(267, 625);
             this.ButtonUpdateTimeline.Name = "ButtonUpdateTimeline";
-            this.ButtonUpdateTimeline.Size = new System.Drawing.Size(200, 25);
+            this.ButtonUpdateTimeline.Size = new System.Drawing.Size(267, 31);
             this.ButtonUpdateTimeline.TabIndex = 1;
             this.ButtonUpdateTimeline.Text = "Update";
             this.ButtonUpdateTimeline.UseVisualStyleBackColor = true;
             this.ButtonUpdateTimeline.Click += new System.EventHandler(this.ButtonUpdateTimeline_Click);
             // 
-            // RequestTimer
+            // PanelThreadView
             // 
-            this.RequestTimer.Interval = 60000;
-            this.RequestTimer.Tick += new System.EventHandler(this.RequestTimer_Tick);
+            this.PanelThreadView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelThreadView.Location = new System.Drawing.Point(140, 35);
+            this.PanelThreadView.Name = "PanelThreadView";
+            this.PanelThreadView.Size = new System.Drawing.Size(661, 546);
+            this.PanelThreadView.TabIndex = 6;
             // 
             // PanelMediaDisplay
             // 
             this.PanelMediaDisplay.BackColor = System.Drawing.SystemColors.Control;
-            this.PanelMediaDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelMediaDisplay.Location = new System.Drawing.Point(3, 28);
-            this.PanelMediaDisplay.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PanelMediaDisplay.Dock = System.Windows.Forms.DockStyle.Left;
+            this.PanelMediaDisplay.Location = new System.Drawing.Point(4, 35);
+            this.PanelMediaDisplay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PanelMediaDisplay.Media = null;
             this.PanelMediaDisplay.Name = "PanelMediaDisplay";
-            this.PanelMediaDisplay.Size = new System.Drawing.Size(598, 437);
+            this.PanelMediaDisplay.Size = new System.Drawing.Size(136, 546);
             this.PanelMediaDisplay.TabIndex = 5;
             this.PanelMediaDisplay.Visible = false;
             // 
-            // TweetView
-            // 
-            this.TweetView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TweetView.Location = new System.Drawing.Point(3, 28);
-            this.TweetView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.TweetView.Name = "TweetView";
-            this.TweetView.Size = new System.Drawing.Size(598, 437);
-            this.TweetView.Status = null;
-            this.TweetView.TabIndex = 3;
-            this.TweetView.OnMouseClickTweetMedia += new Imetter.MediaMouseClickEvent(this.TweetView_OnMouseClickTweetMedia);
-            // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(604, 468);
+            this.ClientSize = new System.Drawing.Size(805, 585);
+            this.Controls.Add(this.PanelThreadView);
             this.Controls.Add(this.PanelMediaDisplay);
-            this.Controls.Add(this.TweetView);
             this.Controls.Add(this.ButtonUpdateTimeline);
             this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormMain";
-            this.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Padding = new System.Windows.Forms.Padding(4);
             this.Text = "Form1";
             this.Shown += new System.EventHandler(this.FormMain_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
@@ -94,9 +86,8 @@
 
         #endregion
         private System.Windows.Forms.Button ButtonUpdateTimeline;
-        private System.Windows.Forms.Timer RequestTimer;
-        private CtrlTweetView TweetView;
         private CtrlMediaDisplayPanel PanelMediaDisplay;
+        private System.Windows.Forms.Panel PanelThreadView;
     }
 }
 

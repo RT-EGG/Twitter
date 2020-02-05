@@ -1,7 +1,7 @@
-﻿using CoreTweet;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using CoreTweet;
 
 namespace Imetter
 {
@@ -62,6 +62,11 @@ namespace Imetter
 
             ButtonMovePrevious.Enabled = CanMovePrevious;
             ButtonMoveNext.Enabled = CanMoveNext;
+            if (TweetLog == null) {
+                LabelLogIndex.Text = $"N/A";
+            } else {
+                LabelLogIndex.Text = $"{ TweetLog.Count - LogIndex } / { TweetLog.Count }";
+            }
             return;
         }
 
@@ -71,19 +76,23 @@ namespace Imetter
             set {
                 m_TweetLog = value;
                 LogIndex = (TweetLog == null) ? -1 : 0;
+                Invalidate();
+                return;
             }
         }
         public int LogIndex
         { 
             get { return m_LogIndex; }
             set {
-                if (value < 0) {
-                    value = -1;
+                if ((value < 0) || (TweetLog == null) || (TweetLog.Count == 0)) {
+                    m_LogIndex = -1;
                 } else {
-
+                    m_LogIndex = Math.Max(0, Math.Min(TweetLog.Count - 1, value));
                 }
 
-                CtrlTweetView1.Status = (LogIndex == -1) ? null : TweetLog[LogIndex];
+                CtrlTweetView1.Status = (m_LogIndex == -1) ? null : TweetLog[m_LogIndex];
+                Invalidate();
+                return;
             }
         }
 
