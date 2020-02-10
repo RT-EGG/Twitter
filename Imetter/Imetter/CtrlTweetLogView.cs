@@ -17,7 +17,7 @@ namespace Imetter
             if (!CanMovePrevious)
                 return;
 
-            LogIndex += 1;
+            LogIndex -= 1;
             return;
         }
         
@@ -26,15 +26,15 @@ namespace Imetter
             if (!CanMoveNext)
                 return;
 
-            LogIndex -= 1;
+            LogIndex += 1;
             return;
         }
 
         public bool CanMovePrevious
-        { get { return (TweetLog != null) && (LogIndex < (TweetLog.Count - 1)); } }
+        { get { return (TweetLog != null) && (LogIndex > 0); } }
 
         public bool CanMoveNext
-        { get { return (TweetLog != null) && (LogIndex > 0); } }
+        { get { return (TweetLog != null) && (LogIndex < (TweetLog.Count - 1)); } }
 
         private void TimerPanelAnimation_Tick(object sender, EventArgs e)
         {
@@ -65,7 +65,7 @@ namespace Imetter
             if (TweetLog == null) {
                 LabelLogIndex.Text = $"N/A";
             } else {
-                LabelLogIndex.Text = $"{ TweetLog.Count - LogIndex } / { TweetLog.Count }";
+                LabelLogIndex.Text = $"{ LogIndex + 1 } / { TweetLog.Count }";
             }
             return;
         }

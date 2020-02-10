@@ -25,6 +25,8 @@ namespace Imetter
                     if (!ContentsView.Visible)
                         Height = LabelTweetText.Bottom + PanelAction.Height;
 
+                    LabelTimeStamp.Text = ToTimeStampText(Status.CreatedAt.DateTime);
+
                     string text = Status.Text;
                     if (Status.ExtendedEntities?.Media?.Length > 0) {
                         var media = Status.ExtendedEntities.Media[0];
@@ -40,6 +42,11 @@ namespace Imetter
         {
             OnMouseClickTweetMedia?.Invoke(inSender, inMedia);
             return;
+        }
+
+        private static string ToTimeStampText(DateTime inTime)
+        {
+            return $"{ inTime.Month }M/{ inTime.Day }D - {inTime.Hour:D2}:{inTime.Minute:D2}:{inTime.Second:D2}";
         }
 
         private Status m_Status = null;

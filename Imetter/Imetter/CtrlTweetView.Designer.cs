@@ -31,13 +31,14 @@
             this.PanelAction = new System.Windows.Forms.TableLayoutPanel();
             this.ContentsView = new Imetter.CtrlMediaThumbnailListView();
             this.UserInfo = new Imetter.CtrlUserInfoView();
+            this.LabelTimeStamp = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LabelTweetText
             // 
             this.LabelTweetText.AutoSize = true;
             this.LabelTweetText.Dock = System.Windows.Forms.DockStyle.Top;
-            this.LabelTweetText.Location = new System.Drawing.Point(0, 78);
+            this.LabelTweetText.Location = new System.Drawing.Point(0, 101);
             this.LabelTweetText.Name = "LabelTweetText";
             this.LabelTweetText.Padding = new System.Windows.Forms.Padding(4);
             this.LabelTweetText.Size = new System.Drawing.Size(40, 23);
@@ -64,13 +65,13 @@
             // ContentsView
             // 
             this.ContentsView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ContentsView.Location = new System.Drawing.Point(0, 101);
+            this.ContentsView.Location = new System.Drawing.Point(0, 124);
             this.ContentsView.Margin = new System.Windows.Forms.Padding(1);
             this.ContentsView.MediaIndex = -1;
             this.ContentsView.Medias = null;
             this.ContentsView.Name = "ContentsView";
             this.ContentsView.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.ContentsView.Size = new System.Drawing.Size(705, 416);
+            this.ContentsView.Size = new System.Drawing.Size(705, 393);
             this.ContentsView.TabIndex = 2;
             this.ContentsView.OnMouseClickMedia += new Imetter.MediaMouseClickEvent(this.ContentsView_OnMouseClickMedia);
             // 
@@ -84,6 +85,17 @@
             this.UserInfo.TabIndex = 0;
             this.UserInfo.User = null;
             // 
+            // LabelTimeStamp
+            // 
+            this.LabelTimeStamp.AutoSize = true;
+            this.LabelTimeStamp.Dock = System.Windows.Forms.DockStyle.Top;
+            this.LabelTimeStamp.Location = new System.Drawing.Point(0, 78);
+            this.LabelTimeStamp.Name = "LabelTimeStamp";
+            this.LabelTimeStamp.Padding = new System.Windows.Forms.Padding(4);
+            this.LabelTimeStamp.Size = new System.Drawing.Size(40, 23);
+            this.LabelTimeStamp.TabIndex = 4;
+            this.LabelTimeStamp.Text = "text";
+            // 
             // CtrlTweetView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -91,6 +103,7 @@
             this.Controls.Add(this.ContentsView);
             this.Controls.Add(this.PanelAction);
             this.Controls.Add(this.LabelTweetText);
+            this.Controls.Add(this.LabelTimeStamp);
             this.Controls.Add(this.UserInfo);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CtrlTweetView";
@@ -105,5 +118,6 @@
         private CtrlMediaThumbnailListView ContentsView;
         private System.Windows.Forms.TableLayoutPanel PanelAction;
         private CtrlUserInfoView UserInfo;
+        private System.Windows.Forms.Label LabelTimeStamp;
     }
 }
