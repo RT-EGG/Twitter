@@ -18,21 +18,33 @@ namespace Imetter
             get { return m_Status; }
             set {
                 m_Status = value;
-                if (m_Status != null) {
-                    UserInfo.User = Status.User;
-                    ContentsView.Medias = Status.ExtendedEntities.Media;
-                    ContentsView.Visible = (Status.ExtendedEntities.Media != null) && (Status.ExtendedEntities.Media.Length != 0);
+
+                Action<Status> SetToUI = (Status inStatus) => {
+                    UserInfo.User = inStatus?.User;
+                    ContentsView.Medias = inStatus?.ExtendedEntities?.Media;
+                    ContentsView.Visible = (inStatus?.ExtendedEntities?.Media != null) && (inStatus?.ExtendedEntities?.Media.Length != 0);
                     if (!ContentsView.Visible)
-                        Height = LabelTweetText.Bottom + PanelAction.Height;
+                        Height = LabelTweetText.Bottom;
 
-                    LabelTimeStamp.Text = ToTimeStampText(Status.CreatedAt.DateTime);
+                    if (inStatus != null)
+                        LabelTimeStamp.Text = ToTimeStampText(inStatus.CreatedAt.DateTime);
 
-                    string text = Status.Text;
-                    if (Status.ExtendedEntities?.Media?.Length > 0) {
-                        var media = Status.ExtendedEntities.Media[0];
-                        text = text.Remove(media.Indices[0], media.Indices[1] - media.Indices[0]);
+                    string text = "";
+                    if (inStatus != null) {
+                        text = inStatus.Text;
+                        if (Status.ExtendedEntities?.Media?.Length > 0) {
+                            var media = Status.ExtendedEntities.Media[0];
+                            text = text.Remove(media.Indices[0], media.Indices[1] - media.Indices[0]);
+                        }
                     }
+                    
                     LabelTweetText.Text = text;
+                };
+
+                if (InvokeRequired) {
+                    Invoke((MethodInvoker)delegate () { SetToUI(m_Status); });
+                } else {
+                    SetToUI(m_Status);
                 }
                 return;
             }

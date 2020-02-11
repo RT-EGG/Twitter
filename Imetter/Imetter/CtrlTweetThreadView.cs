@@ -49,6 +49,7 @@ namespace Imetter
 
                 MessageObserver = new FilterStreamingMessageObserver(Tokens, Keyword);
                 MessageObserver.OnReceiveStatus += MessageObserver_OnReceiveStatus;
+                MessageObserver.Start();
 
                 return;
             }
@@ -62,6 +63,7 @@ namespace Imetter
                 return;
 
             TweetLog.Add(inStatus);
+            Invalidate();
             return;
         }
 

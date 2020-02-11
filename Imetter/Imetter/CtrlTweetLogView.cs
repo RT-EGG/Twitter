@@ -17,7 +17,7 @@ namespace Imetter
             if (!CanMovePrevious)
                 return;
 
-            LogIndex -= 1;
+            LogIndex += 1;
             return;
         }
         
@@ -26,15 +26,15 @@ namespace Imetter
             if (!CanMoveNext)
                 return;
 
-            LogIndex += 1;
+            LogIndex -= 1;
             return;
         }
 
         public bool CanMovePrevious
-        { get { return (TweetLog != null) && (LogIndex > 0); } }
+        { get { return (TweetLog != null) && (LogIndex < (TweetLog.Count - 1)); } }
 
         public bool CanMoveNext
-        { get { return (TweetLog != null) && (LogIndex < (TweetLog.Count - 1)); } }
+        { get { return (TweetLog != null) && (LogIndex > 0); } }
 
         private void TimerPanelAnimation_Tick(object sender, EventArgs e)
         {
@@ -60,12 +60,16 @@ namespace Imetter
         {
             base.OnInvalidated(e);
 
-            ButtonMovePrevious.Enabled = CanMovePrevious;
-            ButtonMoveNext.Enabled = CanMoveNext;
-            if (TweetLog == null) {
-                LabelLogIndex.Text = $"N/A";
+            Action UpdateUI = () => {
+                ButtonMovePrevious.Enabled = CanMovePrevious;
+                ButtonMoveNext.Enabled = CanMoveNext;
+                LabelLogIndex.Text = (TweetLog == null) ? "N/A" : $"{ TweetLog.Count - LogIndex } / { TweetLog.Count }";
+            };
+
+            if (InvokeRequired) {
+                Invoke((MethodInvoker)delegate () { UpdateUI(); });
             } else {
-                LabelLogIndex.Text = $"{ LogIndex + 1 } / { TweetLog.Count }";
+                UpdateUI();
             }
             return;
         }
@@ -80,6 +84,7 @@ namespace Imetter
                 return;
             }
         }
+
         public int LogIndex
         { 
             get { return m_LogIndex; }

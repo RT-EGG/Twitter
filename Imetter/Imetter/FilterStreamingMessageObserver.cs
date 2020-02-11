@@ -16,6 +16,11 @@ namespace Imetter
 
         public void Start()
         {
+            if (InternalObserver != null) {
+                InternalObserver.OnReceiveError -= InternalObserver_OnReceiveError;
+                InternalObserver.OnReceiveStatus -= InternalObserver_OnReceiveStatus;
+            }
+
             InternalObserver = new StreamingMessageObserver();
             InternalObserver.OnReceiveError += InternalObserver_OnReceiveError;
             InternalObserver.OnReceiveStatus += InternalObserver_OnReceiveStatus;

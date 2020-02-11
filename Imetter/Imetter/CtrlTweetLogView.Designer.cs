@@ -33,8 +33,8 @@
             this.PanelTweetViewStage = new System.Windows.Forms.Panel();
             this.PanelTweetSlideView = new System.Windows.Forms.Panel();
             this.TimerPanelAnimation = new System.Windows.Forms.Timer(this.components);
-            this.CtrlTweetView1 = new Imetter.CtrlTweetView();
             this.LabelLogIndex = new System.Windows.Forms.Label();
+            this.CtrlTweetView1 = new Imetter.CtrlTweetView();
             this.PanelTweetViewStage.SuspendLayout();
             this.PanelTweetSlideView.SuspendLayout();
             this.SuspendLayout();
@@ -46,9 +46,8 @@
             this.ButtonMovePrevious.Font = new System.Drawing.Font("MS UI Gothic", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ButtonMovePrevious.ForeColor = System.Drawing.Color.Gray;
             this.ButtonMovePrevious.Location = new System.Drawing.Point(0, 0);
-            this.ButtonMovePrevious.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ButtonMovePrevious.Name = "ButtonMovePrevious";
-            this.ButtonMovePrevious.Size = new System.Drawing.Size(64, 584);
+            this.ButtonMovePrevious.Size = new System.Drawing.Size(48, 467);
             this.ButtonMovePrevious.TabIndex = 0;
             this.ButtonMovePrevious.Text = "<";
             this.ButtonMovePrevious.UseVisualStyleBackColor = false;
@@ -60,10 +59,9 @@
             this.ButtonMoveNext.Dock = System.Windows.Forms.DockStyle.Right;
             this.ButtonMoveNext.Font = new System.Drawing.Font("MS UI Gothic", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ButtonMoveNext.ForeColor = System.Drawing.Color.Gray;
-            this.ButtonMoveNext.Location = new System.Drawing.Point(717, 0);
-            this.ButtonMoveNext.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ButtonMoveNext.Location = new System.Drawing.Point(538, 0);
             this.ButtonMoveNext.Name = "ButtonMoveNext";
-            this.ButtonMoveNext.Size = new System.Drawing.Size(64, 584);
+            this.ButtonMoveNext.Size = new System.Drawing.Size(48, 467);
             this.ButtonMoveNext.TabIndex = 1;
             this.ButtonMoveNext.Text = ">";
             this.ButtonMoveNext.UseVisualStyleBackColor = false;
@@ -73,21 +71,19 @@
             // 
             this.PanelTweetViewStage.Controls.Add(this.PanelTweetSlideView);
             this.PanelTweetViewStage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelTweetViewStage.Location = new System.Drawing.Point(64, 26);
-            this.PanelTweetViewStage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PanelTweetViewStage.Location = new System.Drawing.Point(48, 20);
             this.PanelTweetViewStage.Name = "PanelTweetViewStage";
-            this.PanelTweetViewStage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.PanelTweetViewStage.Size = new System.Drawing.Size(653, 558);
+            this.PanelTweetViewStage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.PanelTweetViewStage.Size = new System.Drawing.Size(490, 447);
             this.PanelTweetViewStage.TabIndex = 2;
             // 
             // PanelTweetSlideView
             // 
             this.PanelTweetSlideView.Controls.Add(this.CtrlTweetView1);
             this.PanelTweetSlideView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelTweetSlideView.Location = new System.Drawing.Point(4, 4);
-            this.PanelTweetSlideView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PanelTweetSlideView.Location = new System.Drawing.Point(3, 3);
             this.PanelTweetSlideView.Name = "PanelTweetSlideView";
-            this.PanelTweetSlideView.Size = new System.Drawing.Size(645, 550);
+            this.PanelTweetSlideView.Size = new System.Drawing.Size(484, 441);
             this.PanelTweetSlideView.TabIndex = 2;
             // 
             // TimerPanelAnimation
@@ -95,39 +91,39 @@
             this.TimerPanelAnimation.Interval = 10;
             this.TimerPanelAnimation.Tick += new System.EventHandler(this.TimerPanelAnimation_Tick);
             // 
-            // CtrlTweetView1
-            // 
-            this.CtrlTweetView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CtrlTweetView1.Location = new System.Drawing.Point(0, 0);
-            this.CtrlTweetView1.Margin = new System.Windows.Forms.Padding(5);
-            this.CtrlTweetView1.Name = "CtrlTweetView1";
-            this.CtrlTweetView1.Size = new System.Drawing.Size(645, 550);
-            this.CtrlTweetView1.Status = null;
-            this.CtrlTweetView1.TabIndex = 0;
-            // 
             // LabelLogIndex
             // 
             this.LabelLogIndex.AutoSize = true;
             this.LabelLogIndex.Dock = System.Windows.Forms.DockStyle.Top;
             this.LabelLogIndex.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.LabelLogIndex.Location = new System.Drawing.Point(64, 0);
+            this.LabelLogIndex.Location = new System.Drawing.Point(48, 0);
+            this.LabelLogIndex.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LabelLogIndex.Name = "LabelLogIndex";
-            this.LabelLogIndex.Padding = new System.Windows.Forms.Padding(3);
-            this.LabelLogIndex.Size = new System.Drawing.Size(77, 26);
+            this.LabelLogIndex.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LabelLogIndex.Size = new System.Drawing.Size(62, 20);
             this.LabelLogIndex.TabIndex = 3;
             this.LabelLogIndex.Text = "-- / --";
             // 
+            // CtrlTweetView1
+            // 
+            this.CtrlTweetView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CtrlTweetView1.Location = new System.Drawing.Point(0, 0);
+            this.CtrlTweetView1.Margin = new System.Windows.Forms.Padding(4);
+            this.CtrlTweetView1.Name = "CtrlTweetView1";
+            this.CtrlTweetView1.Size = new System.Drawing.Size(484, 441);
+            this.CtrlTweetView1.Status = null;
+            this.CtrlTweetView1.TabIndex = 0;
+            // 
             // CtrlTweetLogView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.PanelTweetViewStage);
             this.Controls.Add(this.LabelLogIndex);
             this.Controls.Add(this.ButtonMoveNext);
             this.Controls.Add(this.ButtonMovePrevious);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "CtrlTweetLogView";
-            this.Size = new System.Drawing.Size(781, 584);
+            this.Size = new System.Drawing.Size(586, 467);
             this.PanelTweetViewStage.ResumeLayout(false);
             this.PanelTweetSlideView.ResumeLayout(false);
             this.ResumeLayout(false);
