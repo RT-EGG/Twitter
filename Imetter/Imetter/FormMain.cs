@@ -77,8 +77,6 @@ namespace Imetter
                                          m_AccessKeys.AccessSecret);
                 try {
                     UserResponse user = m_Tokens.Account.VerifyCredentials();
-                    
-                    CreateNewFilterStream("Keyword");
 
                 } catch (Exception e) /*(WebException e)*/ {
                     // can not authorize user by saved access tokens.
@@ -103,7 +101,14 @@ namespace Imetter
                 m_TweetThreadView.Dock = DockStyle.Fill;
 
             } else {
+                if (m_TweetThreadView.Keyword == inKeyword)
+                    return;
+
                 m_TweetThreadView.Keyword = inKeyword;
+            }
+
+            if (TextBoxKeyword.Text != inKeyword) {
+                TextBoxKeyword.Text = inKeyword;
             }
             
             return;
@@ -115,28 +120,6 @@ namespace Imetter
                 Close();
                 return;
             }
-
-            return;
-        }
-
-        private void ButtonUpdateTimeline_Click(object sender, EventArgs e)
-        {
-            UpdateTimeline();
-            return;
-        }
-
-        private void UpdateTimeline()
-        {
-            //var responses = m_Tokens.Statuses.UserTimeline(since_id: m_LastResponseID, count: 100, include_rts: false, exclude_replies: true);
-            //foreach (var response in responses) {
-            //    if ((response.ExtendedEntities?.Media　!= null) && (response.ExtendedEntities?.Media.Count() > 0)) {
-            //        TweetView.Status = response;
-            //        break;
-            //    }
-            //}
-
-            //if (responses.Count > 0)
-            //    m_LastResponseID = responses.First().Id;
 
             return;
         }
@@ -159,10 +142,14 @@ namespace Imetter
             return;
         }
 
+        private void ButtonChangeKeyword_Click(object sender, EventArgs e)
+        {
+            CreateNewFilterStream(TextBoxKeyword.Text);
+            return;
+        }
+
         private OAuth.OAuthSession m_Session = null;
         private Tokens m_Tokens = null;
-        private long? m_LastResponseID = null;
-        private Queue<Status> m_TweetLog = new Queue<Status>();
 
         private AuthorizeKeys.ApplicationKeys m_ApplicationKeys = null;
         private AuthorizeKeys.AccessKeys m_AccessKeys = null;
