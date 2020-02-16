@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
 using CoreTweet;
 
@@ -77,6 +76,7 @@ namespace Imetter
                                          m_AccessKeys.AccessSecret);
                 try {
                     UserResponse user = m_Tokens.Account.VerifyCredentials();
+                    
 
                 } catch (Exception e) /*(WebException e)*/ {
                     // can not authorize user by saved access tokens.
@@ -99,6 +99,7 @@ namespace Imetter
                 m_TweetThreadView = new CtrlTweetThreadView(m_Tokens, inKeyword);
                 m_TweetThreadView.Parent = PanelThreadView; 
                 m_TweetThreadView.Dock = DockStyle.Fill;
+                m_TweetThreadView.StatusChanged += M_TweetThreadView_StatusChanged;
 
             } else {
                 if (m_TweetThreadView.Keyword == inKeyword)
@@ -148,13 +149,85 @@ namespace Imetter
             return;
         }
 
+        private void ButtonRT_Click(object sender, EventArgs e)
+        {
+            Status status = m_TweetThreadView?.Status;
+            if (status == null)
+                return;
+            
+            if (IsRetweeted(status)) {
+                m_Tokens.Statuses.Unretweet(status.Id);
+                status.IsRetweeted = false;
+            } else {
+                StatusResponse response = m_Tokens.Statuses.Retweet(status.Id);
+                status.IsRetweeted = true;
+            }
+            
+            UpdateActionButtonAppearance();
+            return;
+        }
+
+        private void ButtonFav_Click(object sender, EventArgs e)
+        {
+            Status status = m_TweetThreadView?.Status;
+            if (status == null)
+                return;
+
+            if (m_Tokens.Statuses.Show(id: status.Id).IsFavorited.Value) {
+                m_Tokens.Favorites.Destroy(status.Id);
+                status.IsFavorited = false;
+            } else {
+                m_Tokens.Favorites.Create(status.Id);
+                status.IsFavorited = true;
+            }
+            UpdateActionButtonAppearance();
+            return;
+        }
+
+        private void M_TweetThreadView_StatusChanged(object inSender, Status inStatus)
+        {
+            UpdateActionButtonAppearance();
+            return;
+        }
+
+        private void UpdateActionButtonAppearance()
+        {
+            ButtonRT.Text = $"RT";
+            ButtonFav.Text = $"Fav";
+
+            Status status = m_TweetThreadView?.Status;
+            if (status == null)
+                return;
+
+            int rtCount  = status.RetweetCount.GetValueOrDefault(0);
+            int favCount = status.FavoriteCount.GetValueOrDefault(0);
+
+            if (rtCount > 0)
+                ButtonRT.Text += $" ({rtCount})";
+            ButtonRT.ForeColor = IsRetweeted(status) ? Color.LimeGreen : Color.Black;
+
+            if (favCount > 0)
+                ButtonFav.Text += $" ({favCount})";
+            ButtonFav.ForeColor = IsFavorited(status) ? Color.HotPink : Color.Black;
+            return;
+        }
+
+        private bool IsRetweeted(Status inStatus)
+        {
+            return m_Tokens.Statuses.Show(id: inStatus.Id).IsRetweeted.GetValueOrDefault(false);
+        }
+
+        private bool IsFavorited(Status inStatus)
+        {
+            return m_Tokens.Statuses.Show(id: inStatus.Id).IsFavorited.GetValueOrDefault(false);
+        }
+
         private OAuth.OAuthSession m_Session = null;
         private Tokens m_Tokens = null;
 
         private AuthorizeKeys.ApplicationKeys m_ApplicationKeys = null;
         private AuthorizeKeys.AccessKeys m_AccessKeys = null;
 
-        private List<CtrlTweetView> m_TweetViewList = new List<CtrlTweetView>();
         private CtrlTweetThreadView m_TweetThreadView = null;
     }
 }

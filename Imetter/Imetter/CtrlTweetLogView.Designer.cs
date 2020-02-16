@@ -32,9 +32,9 @@
             this.ButtonMoveNext = new System.Windows.Forms.Button();
             this.PanelTweetViewStage = new System.Windows.Forms.Panel();
             this.PanelTweetSlideView = new System.Windows.Forms.Panel();
+            this.CtrlTweetView1 = new Imetter.CtrlTweetView();
             this.TimerPanelAnimation = new System.Windows.Forms.Timer(this.components);
             this.LabelLogIndex = new System.Windows.Forms.Label();
-            this.CtrlTweetView1 = new Imetter.CtrlTweetView();
             this.PanelTweetViewStage.SuspendLayout();
             this.PanelTweetSlideView.SuspendLayout();
             this.SuspendLayout();
@@ -73,7 +73,7 @@
             this.PanelTweetViewStage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelTweetViewStage.Location = new System.Drawing.Point(48, 20);
             this.PanelTweetViewStage.Name = "PanelTweetViewStage";
-            this.PanelTweetViewStage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.PanelTweetViewStage.Padding = new System.Windows.Forms.Padding(3);
             this.PanelTweetViewStage.Size = new System.Drawing.Size(490, 447);
             this.PanelTweetViewStage.TabIndex = 2;
             // 
@@ -85,6 +85,16 @@
             this.PanelTweetSlideView.Name = "PanelTweetSlideView";
             this.PanelTweetSlideView.Size = new System.Drawing.Size(484, 441);
             this.PanelTweetSlideView.TabIndex = 2;
+            // 
+            // CtrlTweetView1
+            // 
+            this.CtrlTweetView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CtrlTweetView1.Location = new System.Drawing.Point(0, 0);
+            this.CtrlTweetView1.Margin = new System.Windows.Forms.Padding(4);
+            this.CtrlTweetView1.Name = "CtrlTweetView1";
+            this.CtrlTweetView1.Size = new System.Drawing.Size(484, 441);
+            this.CtrlTweetView1.Status = null;
+            this.CtrlTweetView1.TabIndex = 0;
             // 
             // TimerPanelAnimation
             // 
@@ -99,20 +109,10 @@
             this.LabelLogIndex.Location = new System.Drawing.Point(48, 0);
             this.LabelLogIndex.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LabelLogIndex.Name = "LabelLogIndex";
-            this.LabelLogIndex.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LabelLogIndex.Padding = new System.Windows.Forms.Padding(2);
             this.LabelLogIndex.Size = new System.Drawing.Size(62, 20);
             this.LabelLogIndex.TabIndex = 3;
             this.LabelLogIndex.Text = "-- / --";
-            // 
-            // CtrlTweetView1
-            // 
-            this.CtrlTweetView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CtrlTweetView1.Location = new System.Drawing.Point(0, 0);
-            this.CtrlTweetView1.Margin = new System.Windows.Forms.Padding(4);
-            this.CtrlTweetView1.Name = "CtrlTweetView1";
-            this.CtrlTweetView1.Size = new System.Drawing.Size(484, 441);
-            this.CtrlTweetView1.Status = null;
-            this.CtrlTweetView1.TabIndex = 0;
             // 
             // CtrlTweetLogView
             // 
