@@ -39,8 +39,8 @@
             this.ButtonSaveImage = new System.Windows.Forms.Button();
             this.ComboSaveImageDirectories = new System.Windows.Forms.ComboBox();
             this.ButtonRT = new System.Windows.Forms.Button();
-            this.PanelMediaDisplay = new Imetter.CtrlMediaDisplayPanel();
             this.TimerActionButtonUpdate = new System.Windows.Forms.Timer(this.components);
+            this.PanelMediaDisplay = new Imetter.CtrlMediaDisplayPanel();
             this.PanelKeyword.SuspendLayout();
             this.PanelActionsForTweet.SuspendLayout();
             this.PanelSaveImage.SuspendLayout();
@@ -50,10 +50,10 @@
             // PanelThreadView
             // 
             this.PanelThreadView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelThreadView.Location = new System.Drawing.Point(105, 29);
+            this.PanelThreadView.Location = new System.Drawing.Point(3, 29);
             this.PanelThreadView.Margin = new System.Windows.Forms.Padding(2);
             this.PanelThreadView.Name = "PanelThreadView";
-            this.PanelThreadView.Size = new System.Drawing.Size(862, 443);
+            this.PanelThreadView.Size = new System.Drawing.Size(964, 443);
             this.PanelThreadView.TabIndex = 6;
             // 
             // PanelKeyword
@@ -172,22 +172,22 @@
             this.ButtonRT.UseVisualStyleBackColor = true;
             this.ButtonRT.Click += new System.EventHandler(this.ButtonRT_Click);
             // 
-            // PanelMediaDisplay
-            // 
-            this.PanelMediaDisplay.BackColor = System.Drawing.SystemColors.Control;
-            this.PanelMediaDisplay.Dock = System.Windows.Forms.DockStyle.Left;
-            this.PanelMediaDisplay.Location = new System.Drawing.Point(3, 29);
-            this.PanelMediaDisplay.Margin = new System.Windows.Forms.Padding(2);
-            this.PanelMediaDisplay.Media = null;
-            this.PanelMediaDisplay.Name = "PanelMediaDisplay";
-            this.PanelMediaDisplay.Size = new System.Drawing.Size(102, 443);
-            this.PanelMediaDisplay.TabIndex = 5;
-            this.PanelMediaDisplay.Visible = false;
-            // 
             // TimerActionButtonUpdate
             // 
             this.TimerActionButtonUpdate.Enabled = true;
             this.TimerActionButtonUpdate.Interval = 3000;
+            // 
+            // PanelMediaDisplay
+            // 
+            this.PanelMediaDisplay.BackColor = System.Drawing.SystemColors.Control;
+            this.PanelMediaDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelMediaDisplay.Location = new System.Drawing.Point(3, 29);
+            this.PanelMediaDisplay.Margin = new System.Windows.Forms.Padding(2);
+            this.PanelMediaDisplay.Media = null;
+            this.PanelMediaDisplay.Name = "PanelMediaDisplay";
+            this.PanelMediaDisplay.Size = new System.Drawing.Size(964, 443);
+            this.PanelMediaDisplay.TabIndex = 5;
+            this.PanelMediaDisplay.Visible = false;
             // 
             // FormMain
             // 

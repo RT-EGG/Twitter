@@ -8,6 +8,7 @@ namespace Imetter
     public partial class CtrlTweetLogView : UserControl
     {
         public delegate void VisibleStatusChangedEvent(object inSender, Status inStatus);
+        public delegate void MouseClickTweetMediaEvent(object inSender, IMediaMouseClickEventArgs inMedia);
 
         public CtrlTweetLogView()
         {
@@ -55,6 +56,12 @@ namespace Imetter
         private void ButtonMoveNext_Click(object sender, EventArgs e)
         {
             MoveNext();
+            return;
+        }
+
+        private void CtrlTweetView1_OnMouseClickTweetMedia(object inSender, IMediaMouseClickEventArgs inMedia)
+        {
+            MouseClickTweetMedia?.Invoke(inSender, inMedia);
             return;
         }
 
@@ -117,6 +124,7 @@ namespace Imetter
         }
 
         public event VisibleStatusChangedEvent StatusChanged;
+        public event MouseClickTweetMediaEvent MouseClickTweetMedia;
 
         private IList<Status> m_TweetLog = null;
         private int m_LogIndex = -1;

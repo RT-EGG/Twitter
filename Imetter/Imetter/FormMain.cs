@@ -100,6 +100,7 @@ namespace Imetter
                 m_TweetThreadView.Parent = PanelThreadView; 
                 m_TweetThreadView.Dock = DockStyle.Fill;
                 m_TweetThreadView.StatusChanged += M_TweetThreadView_StatusChanged;
+                m_TweetThreadView.MouseClickTweetMedia += M_TweetThreadView_MouseClickTweetMedia;
 
             } else {
                 if (m_TweetThreadView.Keyword == inKeyword)
@@ -125,21 +126,13 @@ namespace Imetter
             return;
         }
 
-        private void TweetView_OnMouseClickTweetMedia(object inSender, IMediaMouseClickEventArgs inMedia)
-        {
-            PanelMediaDisplay.Media = inMedia.Media;
-            PanelMediaDisplay.Visible = PanelMediaDisplay.Media != null;
-            //TweetView.Visible = !PanelMediaDisplay.Visible;
-            return;
-        }
-
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {
             if (PanelMediaDisplay.Visible) {
                 PanelMediaDisplay.Media = null;
                 PanelMediaDisplay.Visible = false;
             }
-            //TweetView.Visible = !PanelMediaDisplay.Visible;
+            PanelThreadView.Visible = !PanelMediaDisplay.Visible;
             return;
         }
 
@@ -187,6 +180,14 @@ namespace Imetter
         private void M_TweetThreadView_StatusChanged(object inSender, Status inStatus)
         {
             UpdateActionButtonAppearance();
+            return;
+        }
+
+        private void M_TweetThreadView_MouseClickTweetMedia(object inSender, IMediaMouseClickEventArgs inMedia)
+        {
+            PanelMediaDisplay.Media = inMedia.Media;
+            PanelMediaDisplay.Visible = PanelMediaDisplay.Media != null;
+            PanelThreadView.Visible = !PanelMediaDisplay.Visible;
             return;
         }
 
