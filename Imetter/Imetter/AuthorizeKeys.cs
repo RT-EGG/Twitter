@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Imetter
 {
-    class AuthorizeKeys
+    class AuthorizeKeys : JsonSerializable
     {
         public class ApplicationKeys : AuthorizeKeys
         {
@@ -30,27 +24,6 @@ namespace Imetter
             [JsonProperty("AccessSecret")]
             public string AccessSecret
             { get; set; } = "";
-        }
-
-        public void ExportToFile(string inPath)
-        {
-            string raw = JsonConvert.SerializeObject(this);
-            using (StreamWriter output = new StreamWriter(new FileStream(inPath, FileMode.Create, FileAccess.Write))) {
-                output.WriteLine(raw);
-            }
-
-            return;
-        }
-
-        public static T LoadFromFile<T>(string inPath) where T : AuthorizeKeys
-        {
-            if (!File.Exists(inPath))
-                return null;
-
-            using (StreamReader input = new StreamReader(new FileStream(inPath, FileMode.Open, FileAccess.Read))) {
-                string text = input.ReadToEnd();
-                return JsonConvert.DeserializeObject<T>(text);
-            }
         }
     }
 }
