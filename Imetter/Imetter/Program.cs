@@ -16,7 +16,12 @@ namespace Imetter
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain());
+            FormMain main = new FormMain();
+            try {
+                Application.Run(main);
+            } finally {
+                main.EndProgram();
+            }
         }
     }
 }

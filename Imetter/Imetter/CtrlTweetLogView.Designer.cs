@@ -32,9 +32,9 @@
             this.ButtonMoveNext = new System.Windows.Forms.Button();
             this.PanelTweetViewStage = new System.Windows.Forms.Panel();
             this.PanelTweetSlideView = new System.Windows.Forms.Panel();
+            this.CtrlTweetView1 = new Imetter.CtrlTweetView();
             this.TimerPanelAnimation = new System.Windows.Forms.Timer(this.components);
             this.LabelLogIndex = new System.Windows.Forms.Label();
-            this.CtrlTweetView1 = new Imetter.CtrlTweetView();
             this.PanelTweetViewStage.SuspendLayout();
             this.PanelTweetSlideView.SuspendLayout();
             this.SuspendLayout();
@@ -86,6 +86,17 @@
             this.PanelTweetSlideView.Size = new System.Drawing.Size(484, 441);
             this.PanelTweetSlideView.TabIndex = 2;
             // 
+            // CtrlTweetView1
+            // 
+            this.CtrlTweetView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CtrlTweetView1.Location = new System.Drawing.Point(0, 0);
+            this.CtrlTweetView1.Margin = new System.Windows.Forms.Padding(4);
+            this.CtrlTweetView1.Name = "CtrlTweetView1";
+            this.CtrlTweetView1.Size = new System.Drawing.Size(484, 441);
+            this.CtrlTweetView1.Status = null;
+            this.CtrlTweetView1.TabIndex = 0;
+            this.CtrlTweetView1.OnMouseClickTweetMedia += new Imetter.MediaMouseClickEvent(this.CtrlTweetView1_OnMouseClickTweetMedia);
+            // 
             // TimerPanelAnimation
             // 
             this.TimerPanelAnimation.Interval = 10;
@@ -103,17 +114,6 @@
             this.LabelLogIndex.Size = new System.Drawing.Size(62, 20);
             this.LabelLogIndex.TabIndex = 3;
             this.LabelLogIndex.Text = "-- / --";
-            // 
-            // CtrlTweetView1
-            // 
-            this.CtrlTweetView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CtrlTweetView1.Location = new System.Drawing.Point(0, 0);
-            this.CtrlTweetView1.Margin = new System.Windows.Forms.Padding(4);
-            this.CtrlTweetView1.Name = "CtrlTweetView1";
-            this.CtrlTweetView1.Size = new System.Drawing.Size(484, 441);
-            this.CtrlTweetView1.Status = null;
-            this.CtrlTweetView1.TabIndex = 0;
-            this.CtrlTweetView1.OnMouseClickTweetMedia += new Imetter.MediaMouseClickEvent(this.CtrlTweetView1_OnMouseClickTweetMedia);
             // 
             // CtrlTweetLogView
             // 

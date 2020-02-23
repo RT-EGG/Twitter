@@ -50,6 +50,11 @@ namespace Imetter
             }
         }
 
+        public MediaEntity CurrentMedia
+        { get { return ContentsView.Medias?[ContentsView.MediaIndex]; } }
+        public int CurrentMediaIndex
+        { get { return ContentsView.MediaIndex; } }
+
         private void ContentsView_OnMouseClickMedia(object inSender, IMediaMouseClickEventArgs inMedia)
         {
             OnMouseClickTweetMedia?.Invoke(inSender, inMedia);

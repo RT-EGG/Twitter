@@ -1,15 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.IO;
+using System.Diagnostics;
+using System.Linq;
 using CoreTweet;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace Imetter
 {
     public partial class FormMain : Form
     {
+        const string ThreadFileName = "thread.json";
+
         public FormMain()
         {
             InitializeComponent();
+
+            return;
+        }
+
+        public void EndProgram()
+        {
+            m_ThreadConfiguration.Keyword = m_TweetThreadView?.Keyword ?? "";
+            List<string> saveDirectories = new List<string>();
+            for (int i = 0; i < ComboSaveImageDirectories.Items.Count - 1; ++i) {
+                saveDirectories.Add(ComboSaveImageDirectories.Items[i].ToString());
+            }
+            m_ThreadConfiguration.SaveDirectories = saveDirectories.ToArray();
+            m_ThreadConfiguration.ExportToFile(ThreadFileName);
 
             return;
         }
@@ -76,7 +96,6 @@ namespace Imetter
                                          m_AccessKeys.AccessSecret);
                 try {
                     UserResponse user = m_Tokens.Account.VerifyCredentials();
-                    
 
                 } catch (Exception e) /*(WebException e)*/ {
                     // can not authorize user by saved access tokens.
@@ -84,7 +103,6 @@ namespace Imetter
                     Console.WriteLine(e.Message);
                     Console.WriteLine(e.StackTrace);
                 }
-
                 
                 m_Session.RequestToken = m_AccessKeys.AccessToken;
                 m_Session.RequestTokenSecret = m_AccessKeys.AccessSecret;
@@ -122,6 +140,25 @@ namespace Imetter
                 Close();
                 return;
             }
+
+            const string ThreadFileName = "thread.json";
+            if (File.Exists(ThreadFileName)) {
+                try {
+                    m_ThreadConfiguration = JsonSerializable.LoadFromFile<ThreadConfiguration>(ThreadFileName);
+
+                } catch {
+                    File.Delete(ThreadFileName);
+                }
+            }
+            if (m_ThreadConfiguration.Keyword != "") {
+                CreateNewFilterStream(m_ThreadConfiguration.Keyword);
+            }
+
+            ComboSaveImageDirectories.Items.Clear();
+            foreach (string directory in m_ThreadConfiguration.SaveDirectories) {
+                ComboSaveImageDirectories.Items.Add(directory);
+            }
+            ComboSaveImageDirectories.Items.Add("Add new directory...");
 
             return;
         }
@@ -223,6 +260,131 @@ namespace Imetter
             return m_Tokens.Statuses.Show(id: inStatus.Id).IsFavorited.GetValueOrDefault(false);
         }
 
+        private void ComboSaveImageDirectories_TextChanged(object sender, EventArgs e)
+        {
+            if (ComboSaveImageDirectories.SelectedIndex == (ComboSaveImageDirectories.Items.Count - 1)) {
+                // add new directory
+                var dialog = new CommonOpenFileDialog("フォルダ選択");
+                dialog.IsFolderPicker = true;
+                if (dialog.ShowDialog() == CommonFileDialogResult.Ok) {
+                    ComboSaveImageDirectories.Items.Insert(ComboSaveImageDirectories.Items.Count - 1, dialog.FileName);
+                    ComboSaveImageDirectories.SelectedIndex = ComboSaveImageDirectories.Items.Count - 2;
+                } else {
+                    ComboSaveImageDirectories.SelectedIndex = -1;
+                }
+            } else {
+                ButtonSaveImage.Text = ComboSaveImageDirectories.Text;
+
+            }
+
+            return;
+        }
+
+        private void ButtonSaveImage_Click(object sender, EventArgs e)
+        {
+            int index = ComboSaveImageDirectories.SelectedIndex;
+            if ((index < 0) || ((ComboSaveImageDirectories.Items.Count - 1) < index))
+                return;
+            Status status = m_TweetThreadView.Status;
+            if (status == null)
+                return;
+            Debug.Assert(ButtonSaveImage.Text == ComboSaveImageDirectories.Text, $"(\"{ ButtonSaveImage.Text }\" == \"{ ComboSaveImageDirectories.Text }\")");
+
+            string directory = ButtonSaveImage.Text;
+            string name = ConvertToFileName(m_ThreadConfiguration.SaveFileNamePattern, status, m_TweetThreadView.CurrentMediaIndex);
+            string filepath = directory + "\\" + name;
+
+            TweetMedia.Query(m_TweetThreadView.CurrentMedia, (ITweetMedia inMedia) => {
+                if (!(inMedia is ITweetImageMedia)) {
+                    AddLog($"Media is { inMedia.MediaType.ToString() }, not image.");
+                    return;
+                }
+
+                ITweetImageMedia media = (inMedia as ITweetImageMedia);
+                filepath = $"{ filepath }{ Path.GetExtension(media.URL) }";
+                media.Image.Save(filepath);
+                AddLog($"Completed save to { filepath }");
+            });
+
+            return;
+        }
+
+        private string ConvertToFileName(string inPattern, Status inStatus, int inMediaIndex)
+        {
+            int index = 0;
+            string name = "";
+            while (index < inPattern.Length) {
+                switch (inPattern[index]) {
+                    case '<':
+                        int endIndex = inPattern.IndexOf('>', ++index);
+                        if (endIndex == -1)
+                            // TODO create new exception class for this pattern
+                            throw new InvalidFileNameCharacterException('<');
+                        DateTime time = inStatus.CreatedAt.DateTime;
+                        string datetime = inPattern.Substring(index, endIndex - index);
+                        datetime = datetime.Replace("YYYY", $"{time.Year:D4}");
+                        datetime = datetime.Replace("YY", $"{time.Year:D4}".Substring(2, 2));
+                        datetime = datetime.Replace("MM", $"{time.Month:D2}");
+                        datetime = datetime.Replace("DD", $"{time.Day:D2}");
+                        datetime = datetime.Replace("HH", $"{time.Hour:D2}");
+                        datetime = datetime.Replace("NN", $"{time.Minute:D2}");
+                        name += datetime;
+                        index = endIndex + 1;
+                        break;
+                    case '?':
+                        //{ get; set; } = "<YYYYMMDDHHNN>?U?I";
+                        switch (inPattern[++index]) {
+                            case 'U':
+                                name += inStatus.User.ScreenName;
+                                break;
+                            case 'I':
+                                name += $"{ inMediaIndex + 1 }";
+                                break;
+                            default:
+                                throw new InvalidFileNameCharacterException('?');
+                        }
+                        ++index;
+                        break;
+                    case '>':
+                    case '\\':
+                    case '/':
+                    case ':':
+                    case '*':
+                    case '\"':
+                        throw new InvalidFileNameCharacterException(inPattern[index]);
+                    default:
+                        name += inPattern[index++];
+                        break;
+                }
+            }
+
+            return name;
+        }
+
+        private void AddLog(string inLine)
+        {
+            Action add = () => {
+                TextBoxLog.Text += inLine + Environment.NewLine;
+
+                const int MaxLines = 10;
+                if (TextBoxLog.Lines.Length > MaxLines) {
+                    List<string> lines = new List<string>(TextBoxLog.Lines);
+
+                    lines.RemoveRange(0, lines.Count - MaxLines);
+                    TextBoxLog.Lines = lines.ToArray();
+                }
+
+                TextBoxLog.Select(TextBoxLog.Text.Length, 0);
+            };
+
+            if (InvokeRequired) {
+                Invoke((MethodInvoker) delegate() { add(); });
+            } else {
+                add();
+            }
+            return;
+        }
+
         private OAuth.OAuthSession m_Session = null;
         private Tokens m_Tokens = null;
 
@@ -230,5 +392,7 @@ namespace Imetter
         private AuthorizeKeys.AccessKeys m_AccessKeys = null;
 
         private CtrlTweetThreadView m_TweetThreadView = null;
+        private ThreadConfiguration m_ThreadConfiguration = new ThreadConfiguration();
+        //private List<string> m_SaveDirectories = new List<string>();
     }
 }

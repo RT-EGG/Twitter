@@ -41,7 +41,7 @@
             this.LabelTweetText.Location = new System.Drawing.Point(0, 80);
             this.LabelTweetText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LabelTweetText.Name = "LabelTweetText";
-            this.LabelTweetText.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.LabelTweetText.Padding = new System.Windows.Forms.Padding(3);
             this.LabelTweetText.Size = new System.Drawing.Size(685, 18);
             this.LabelTweetText.TabIndex = 1;
             this.LabelTweetText.Text = "textaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
@@ -54,7 +54,7 @@
             this.LabelTimeStamp.Location = new System.Drawing.Point(0, 62);
             this.LabelTimeStamp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LabelTimeStamp.Name = "LabelTimeStamp";
-            this.LabelTimeStamp.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.LabelTimeStamp.Padding = new System.Windows.Forms.Padding(3);
             this.LabelTimeStamp.Size = new System.Drawing.Size(31, 18);
             this.LabelTimeStamp.TabIndex = 4;
             this.LabelTimeStamp.Text = "text";

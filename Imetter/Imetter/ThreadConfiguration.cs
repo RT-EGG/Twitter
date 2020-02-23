@@ -3,7 +3,7 @@ using System;
 
 namespace Imetter
 {
-    class ThreadConfiguration
+    class ThreadConfiguration : JsonSerializable
     {
         [JsonProperty(PropertyName = "keyword")]
         public string Keyword

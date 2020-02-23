@@ -25,7 +25,7 @@ namespace Imetter
 
     public interface ITweetImageMedia : ITweetMedia
     {
-        Image Image { get; }        
+        Bitmap Image { get; }        
     }
 
     abstract class TweetMedia : ITweetMedia
@@ -110,7 +110,7 @@ namespace Imetter
             }
 
             public override TweetMediaType MediaType => TweetMediaType.Image;
-            Image ITweetImageMedia.Image => Image;
+            Bitmap ITweetImageMedia.Image => Image;
             public Bitmap Image
             { get; private set; } = null;
 

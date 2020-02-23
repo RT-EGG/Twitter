@@ -40,6 +40,7 @@
             this.ComboSaveImageDirectories = new System.Windows.Forms.ComboBox();
             this.ButtonRT = new System.Windows.Forms.Button();
             this.TimerActionButtonUpdate = new System.Windows.Forms.Timer(this.components);
+            this.TextBoxLog = new System.Windows.Forms.TextBox();
             this.PanelMediaDisplay = new Imetter.CtrlMediaDisplayPanel();
             this.PanelKeyword.SuspendLayout();
             this.PanelActionsForTweet.SuspendLayout();
@@ -53,7 +54,7 @@
             this.PanelThreadView.Location = new System.Drawing.Point(3, 29);
             this.PanelThreadView.Margin = new System.Windows.Forms.Padding(2);
             this.PanelThreadView.Name = "PanelThreadView";
-            this.PanelThreadView.Size = new System.Drawing.Size(964, 443);
+            this.PanelThreadView.Size = new System.Drawing.Size(964, 371);
             this.PanelThreadView.TabIndex = 6;
             // 
             // PanelKeyword
@@ -96,7 +97,7 @@
             this.PanelActionsForTweet.Controls.Add(this.PanelSaveImage, 0, 0);
             this.PanelActionsForTweet.Controls.Add(this.ButtonRT, 1, 0);
             this.PanelActionsForTweet.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PanelActionsForTweet.Location = new System.Drawing.Point(3, 472);
+            this.PanelActionsForTweet.Location = new System.Drawing.Point(3, 400);
             this.PanelActionsForTweet.Name = "PanelActionsForTweet";
             this.PanelActionsForTweet.RowCount = 1;
             this.PanelActionsForTweet.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -147,6 +148,7 @@
             this.ButtonSaveImage.TabIndex = 2;
             this.ButtonSaveImage.Text = "---";
             this.ButtonSaveImage.UseVisualStyleBackColor = true;
+            this.ButtonSaveImage.Click += new System.EventHandler(this.ButtonSaveImage_Click);
             // 
             // ComboSaveImageDirectories
             // 
@@ -158,6 +160,7 @@
             this.ComboSaveImageDirectories.Name = "ComboSaveImageDirectories";
             this.ComboSaveImageDirectories.Size = new System.Drawing.Size(752, 20);
             this.ComboSaveImageDirectories.TabIndex = 1;
+            this.ComboSaveImageDirectories.TextChanged += new System.EventHandler(this.ComboSaveImageDirectories_TextChanged);
             // 
             // ButtonRT
             // 
@@ -177,6 +180,16 @@
             this.TimerActionButtonUpdate.Enabled = true;
             this.TimerActionButtonUpdate.Interval = 3000;
             // 
+            // TextBoxLog
+            // 
+            this.TextBoxLog.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.TextBoxLog.Location = new System.Drawing.Point(3, 459);
+            this.TextBoxLog.Multiline = true;
+            this.TextBoxLog.Name = "TextBoxLog";
+            this.TextBoxLog.ReadOnly = true;
+            this.TextBoxLog.Size = new System.Drawing.Size(964, 72);
+            this.TextBoxLog.TabIndex = 8;
+            // 
             // PanelMediaDisplay
             // 
             this.PanelMediaDisplay.BackColor = System.Drawing.SystemColors.Control;
@@ -185,7 +198,7 @@
             this.PanelMediaDisplay.Margin = new System.Windows.Forms.Padding(2);
             this.PanelMediaDisplay.Media = null;
             this.PanelMediaDisplay.Name = "PanelMediaDisplay";
-            this.PanelMediaDisplay.Size = new System.Drawing.Size(964, 443);
+            this.PanelMediaDisplay.Size = new System.Drawing.Size(964, 371);
             this.PanelMediaDisplay.TabIndex = 5;
             this.PanelMediaDisplay.Visible = false;
             // 
@@ -197,6 +210,7 @@
             this.Controls.Add(this.PanelThreadView);
             this.Controls.Add(this.PanelMediaDisplay);
             this.Controls.Add(this.PanelActionsForTweet);
+            this.Controls.Add(this.TextBoxLog);
             this.Controls.Add(this.PanelKeyword);
             this.KeyPreview = true;
             this.Name = "FormMain";
@@ -210,6 +224,7 @@
             this.PanelSaveImage.ResumeLayout(false);
             this.PanelSaveImageButton.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -227,6 +242,7 @@
         private System.Windows.Forms.ComboBox ComboSaveImageDirectories;
         private System.Windows.Forms.Button ButtonRT;
         private System.Windows.Forms.Timer TimerActionButtonUpdate;
+        private System.Windows.Forms.TextBox TextBoxLog;
     }
 }
 

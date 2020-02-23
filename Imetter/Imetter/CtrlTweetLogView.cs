@@ -123,6 +123,10 @@ namespace Imetter
             }
         }
 
+        public MediaEntity CurrentMedia => CtrlTweetView1.CurrentMedia;
+        public int CurrentMediaIndex => CtrlTweetView1.CurrentMediaIndex;
+
+
         public event VisibleStatusChangedEvent StatusChanged;
         public event MouseClickTweetMediaEvent MouseClickTweetMedia;
 
